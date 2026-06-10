@@ -65,6 +65,8 @@
       --card-purple: #4c1d95;
       --card-orange: #7c2d12;
       --card-green: #14532d;
+      --card-download: #0c4a6e;
+      --card-upload: #881337;
     }
 
     html[data-theme="light"] {
@@ -100,6 +102,8 @@
       --card-purple: #f3e8ff;
       --card-orange: #ffe8d6;
       --card-green: #e2fce6;
+      --card-download: #e0f2fe;
+      --card-upload: #ffe4e6;
     }
 
     html {
@@ -425,7 +429,7 @@
       gap: var(--space-3);
     }
 
-    .traffic-item,
+        .traffic-item,
     .cd-unit {
       background: var(--surface);
       border: 2.5px solid var(--border);
@@ -434,6 +438,9 @@
       padding: 0.8rem;
       text-align: center;
     }
+    
+    .traffic-details > .traffic-item:nth-child(1) { background-color: var(--card-download); }
+    .traffic-details > .traffic-item:nth-child(2) { background-color: var(--card-upload); }
 
     .traffic-item i {
       color: var(--accent);

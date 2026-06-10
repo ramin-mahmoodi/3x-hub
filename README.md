@@ -4,17 +4,6 @@ Modern custom subscription page for **3x-ui v3.3.0+**
 
 **3x-hub** یک صفحه ساب کاستوم، مدرن، ریسپانسیو و دو زبانه برای پنل **3x-ui** است که برای نسخه‌های **3.3.0 به بعد** آماده شده است.
 
-## 🖼️ Preview
-
-### 🌙 Dark Mode
-
-![3x-hub Dark Preview](preview-dark.png)
-
-### ☀️ Light Mode
-
-![3x-hub Light Preview](preview-light.png)
-
-
 ## ✨ Features
 
 * 🎨 طراحی مدرن و ریسپانسیو
