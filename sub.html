@@ -1122,7 +1122,8 @@
     en: { used: "Used", usage: "Usage", total: "Total", remain: "Remaining", expiry: "Expiry", days: "Days", hours: "Hours", minutes: "Mins", copy: "Copy Link", qr: "QR", active: "Active", inactive: "Inactive", unlimited: "Unlimited", copyDone: "Copied!", copyFail: "Failed", download: "Download", upload: "Upload", configTitle: "Configs", appsTitle: "Client Apps", noConfig: "No configs available", lastOnline: "Last online", timeExpired: "Expired", timeUnlimited: "No limit", remainTime: "Remaining time", expireDateFormat: "day / hour / min", subscriptionHub: "Subscription Hub", volumeUnit: "GB" }
   };
   let currentLang = localStorage.getItem("nexus_lang") || "fa";
-  let isDark = (localStorage.getItem("nexus_theme") || "dark") !== "light";
+  // ======================== UI & THEME ========================
+  let isDark = localStorage.getItem("nexus_theme") ? localStorage.getItem("nexus_theme") === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
   let countdownInterval = null;
 
   function t(key) { return locales[currentLang][key] || key; }
