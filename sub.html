@@ -1202,14 +1202,8 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ======================== QUICK IMPORT GRID ======================== */
-    .quick-import-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: var(--space-3);
-    }
-
-    .import-app-card {
+    /* ======================== SUB LINKS (QUICK CONNECT) & APPS ======================== */
+    .sub-link-card {
       background: var(--surface);
       border: 2.5px solid var(--border);
       border-radius: var(--radius-md);
@@ -1217,27 +1211,267 @@
       padding: var(--space-3) var(--space-4);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: var(--space-3);
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: 800;
       transition: transform 150ms ease, box-shadow 150ms ease;
     }
 
-    .import-app-card:hover {
+    .sub-link-card:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--border);
+    }
+
+    .sub-link-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      min-width: 0;
+      flex: 1;
+    }
+
+    .sub-link-tag {
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--border);
+      box-shadow: 1.5px 1.5px 0px var(--border);
+      letter-spacing: 0.05em;
+      flex: 0 0 auto;
+    }
+
+    .tag-sub { background: #10b981; color: #fff; }
+    .tag-json { background: #8b5cf6; color: #fff; }
+    .tag-clash { background: #f59e0b; color: #fff; }
+
+    .sub-link-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      display: block;
+    }
+
+    .sub-link-url {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      direction: ltr;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: ui-monospace, monospace;
+      margin-top: 0.2rem;
+    }
+
+    [dir="rtl"] .sub-link-url {
+      text-align: right;
+    }
+
+    .sub-link-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex: 0 0 auto;
+    }
+
+    /* In-page Scan Card */
+    .sub-scan-card {
+      background: var(--surface-strong);
+      border: 2.5px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      box-shadow: 3px 3px 0px var(--border);
+    }
+
+    .inpage-qr-code {
+      flex: 0 0 auto;
+      background: #ffffff;
+      padding: 8px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: 2px 2px 0px var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .inpage-qr-code canvas,
+    .inpage-qr-code img {
+      display: block;
+      width: 120px;
+      height: 120px;
+    }
+
+    .sub-scan-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Platform Segmented Switcher */
+    .platform-segmented-bar {
+      display: flex;
+      gap: 0.4rem;
+      background: var(--surface-strong);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.35rem;
+      box-shadow: 2.5px 2.5px 0px var(--border);
+      overflow-x: auto;
+    }
+
+    .platform-tab-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.8rem;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
+
+    .platform-tab-btn:hover {
+      color: var(--text-primary);
+      background: var(--surface);
+    }
+
+    .platform-tab-btn.active {
+      color: var(--text-primary);
+      background: var(--accent-soft);
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0px var(--border);
+    }
+
+    /* Sub Apps Grid */
+    .sub-apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .sub-app-item-card {
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: 3px 3px 0px var(--border);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-3);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .sub-app-item-card:hover {
       transform: translate(-2px, -2px);
       box-shadow: 5px 5px 0px var(--border);
       background: var(--surface-strong);
     }
 
-    .import-app-card:active {
-      transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px var(--border);
+    .sub-app-item-top {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
     }
 
-    .import-app-card i {
-      font-size: 1.45rem;
+    .sub-app-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border);
+      background: var(--surface-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      color: var(--accent);
+      box-shadow: 2px 2px 0px var(--border);
       flex: 0 0 auto;
+    }
+
+    .sub-app-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sub-app-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .sub-app-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    .sub-app-actions {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+      margin-top: 0.25rem;
+    }
+
+    .sub-app-btn-add {
+      flex: 1;
+      padding: 0.55rem 0.8rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      text-decoration: none;
+    }
+
+    .sub-app-btn-dl {
+      padding: 0.55rem 0.75rem;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      color: var(--text-secondary);
+      background: var(--surface-strong);
+    }
+
+    .sub-app-btn-dl:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 640px) {
+      .sub-scan-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .sub-link-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .sub-link-actions {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      .sub-apps-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ======================== MOBILE BOTTOM NAVIGATION BAR ======================== */
@@ -1346,18 +1580,18 @@
       <i class="fa-solid fa-gauge-high"></i>
       <span id="tabNavDashboard">وضعیت</span>
     </button>
-    <button class="tab-btn" data-tab="tab-configs" type="button">
-      <i class="fa-solid fa-server"></i>
-      <span id="tabNavConfigs">کانفیگ‌ها</span>
-      <span id="tabConfigsBadge" class="tab-badge">0</span>
-    </button>
     <button class="tab-btn" data-tab="tab-import" type="button">
       <i class="fa-solid fa-bolt"></i>
       <span id="tabNavImport">اتصال سریع</span>
     </button>
     <button class="tab-btn" data-tab="tab-apps" type="button">
-      <i class="fa-solid fa-download"></i>
+      <i class="fa-solid fa-mobile-screen-button"></i>
       <span id="tabNavApps">برنامه‌ها</span>
+    </button>
+    <button class="tab-btn" data-tab="tab-configs" type="button">
+      <i class="fa-solid fa-server"></i>
+      <span id="tabNavConfigs">کانفیگ‌ها</span>
+      <span id="tabConfigsBadge" class="tab-badge">0</span>
     </button>
   </nav>
 
@@ -1400,7 +1634,114 @@
     </div>
   </div>
 
-  <!-- TAB 2: CONFIGS -->
+  <!-- TAB 2: QUICK CONNECT / SUBSCRIPTION LINKS (Official 3x-ui SubLinksTab) -->
+  <div id="tab-import" class="tab-page">
+    <div class="glass-panel" style="padding: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.25rem;">
+        <i class="fa-solid fa-link" style="color: var(--accent); font-size: 1.3rem;"></i>
+        <strong id="quickLinksTitle" style="font-size: 1.15rem;">لینک‌های اختصاصی اشتراک</strong>
+      </div>
+
+      <div class="sub-links-list" style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <!-- SUB ROW -->
+        <div class="sub-link-card">
+          <div class="sub-link-info">
+            <span class="sub-link-tag tag-sub">SUB</span>
+            <div style="min-width: 0; flex: 1;">
+              <strong class="sub-link-title" id="lblSubStandard">اشتراک معمولی (Base64)</strong>
+              <div class="sub-link-url" id="valSubStandard"></div>
+            </div>
+          </div>
+          <div class="sub-link-actions">
+            <button class="mini-action" id="btnCopySubStandard" type="button" title="کپی لینک"><i class="fa-regular fa-copy"></i></button>
+            <button class="mini-action" id="btnQrSubStandard" type="button" title="نمایش QR"><i class="fa-solid fa-qrcode"></i></button>
+          </div>
+        </div>
+
+        <!-- JSON ROW (Sing-box) -->
+        <div class="sub-link-card" id="rowSubJson">
+          <div class="sub-link-info">
+            <span class="sub-link-tag tag-json">JSON</span>
+            <div style="min-width: 0; flex: 1;">
+              <strong class="sub-link-title" id="lblSubJson">اشتراک Sing-box (JSON)</strong>
+              <div class="sub-link-url" id="valSubJson"></div>
+            </div>
+          </div>
+          <div class="sub-link-actions">
+            <a class="mini-action" id="btnDownloadSubJson" href="#" target="_blank" title="دانلود فایل خام"><i class="fa-solid fa-download"></i></a>
+            <button class="mini-action" id="btnCopySubJson" type="button" title="کپی لینک"><i class="fa-regular fa-copy"></i></button>
+            <button class="mini-action" id="btnQrSubJson" type="button" title="نمایش QR"><i class="fa-solid fa-qrcode"></i></button>
+          </div>
+        </div>
+
+        <!-- CLASH ROW (Clash / Mihomo) -->
+        <div class="sub-link-card" id="rowSubClash">
+          <div class="sub-link-info">
+            <span class="sub-link-tag tag-clash">CLASH</span>
+            <div style="min-width: 0; flex: 1;">
+              <strong class="sub-link-title" id="lblSubClash">اشتراک Clash / Mihomo</strong>
+              <div class="sub-link-url" id="valSubClash"></div>
+            </div>
+          </div>
+          <div class="sub-link-actions">
+            <a class="mini-action" id="btnDownloadSubClash" href="#" target="_blank" title="دانلود فایل خام"><i class="fa-solid fa-download"></i></a>
+            <button class="mini-action" id="btnCopySubClash" type="button" title="کپی لینک"><i class="fa-regular fa-copy"></i></button>
+            <button class="mini-action" id="btnQrSubClash" type="button" title="نمایش QR"><i class="fa-solid fa-qrcode"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IN-PAGE QR SCAN CARD (Official 3x-ui sub-qr-card) -->
+      <div class="sub-scan-card" style="margin-top: 1.5rem;">
+        <div id="inpageQrContainer" class="inpage-qr-code"></div>
+        <div class="sub-scan-info">
+          <strong id="inpageScanTitle" style="font-size: 1.05rem; display: block; margin-bottom: 0.35rem;">اسکن با گوشی</strong>
+          <p id="inpageScanHint" style="font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 0.8rem; line-height: 1.5;">این کد را در اپلیکیشن VPN اسکن کنید تا اشتراک بدون کپی‌کردن لینک اضافه شود.</p>
+          <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+            <button id="btnSaveInpageQr" class="btn-icon" type="button" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;"><i class="fa-solid fa-download"></i> <span id="lblSaveInpageQr">ذخیره تصویر QR</span></button>
+            <button id="btnCopyInpageSub" class="btn-icon btn-primary" type="button" style="padding: 0.45rem 0.9rem; font-size: 0.8rem;"><i class="fa-regular fa-copy"></i> <span id="lblCopyInpageSub">کپی لینک اشتراک</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: APPS (Official 3x-ui SubAppsTab + buildSubApps) -->
+  <div id="tab-apps" class="tab-page">
+    <div class="glass-panel" style="padding: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: var(--space-2);">
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <i class="fa-solid fa-mobile-screen-button" style="color: var(--accent); font-size: 1.3rem;"></i>
+          <strong id="appsHeaderTitle" style="font-size: 1.15rem;">اپلیکیشن‌های پیشنهادی و اتصال خودکار</strong>
+        </div>
+      </div>
+
+      <!-- PLATFORM SELECTOR (Segmented Bar) -->
+      <div class="platform-segmented-bar" role="tablist" aria-label="انتخاب پلتفرم">
+        <button class="platform-tab-btn active" data-platform="android" type="button">
+          <i class="fa-brands fa-android"></i>
+          <span>Android</span>
+        </button>
+        <button class="platform-tab-btn" data-platform="ios" type="button">
+          <i class="fa-brands fa-apple"></i>
+          <span>iOS</span>
+        </button>
+        <button class="platform-tab-btn" data-platform="windows" type="button">
+          <i class="fa-brands fa-windows"></i>
+          <span>Windows</span>
+        </button>
+        <button class="platform-tab-btn" data-platform="macos" type="button">
+          <i class="fa-brands fa-apple"></i>
+          <span>macOS</span>
+        </button>
+      </div>
+
+      <!-- APPS GRID CONTAINER -->
+      <div id="appsCardsContainer" class="sub-apps-grid" style="margin-top: 1.25rem;"></div>
+    </div>
+  </div>
+
+  <!-- TAB 4: CONFIGS -->
   <div id="tab-configs" class="tab-page">
     <div class="glass-panel" style="padding: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: var(--space-2);">
@@ -1427,109 +1768,6 @@
     </div>
   </div>
 
-  <!-- TAB 3: QUICK CONNECT (ONE-CLICK IMPORT) -->
-  <div id="tab-import" class="tab-page">
-    <div class="glass-panel" style="padding: 1.5rem;">
-      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.25rem;">
-        <i class="fa-solid fa-bolt" style="color: var(--accent); font-size: 1.3rem;"></i>
-        <strong id="quickImportHeaderTitle" style="font-size: 1.1rem;">افزودن مستقیم به نرم‌افزارها</strong>
-      </div>
-      <div class="quick-import-grid">
-        <a id="btnImportV2rayNG" class="import-app-card" href="#">
-          <i class="fa-brands fa-android"></i>
-          <div>
-            <div>v2rayNG</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Android</small>
-          </div>
-        </a>
-
-        <a id="btnImportV2Box" class="import-app-card" href="#">
-          <i class="fa-solid fa-cube"></i>
-          <div>
-            <div>V2Box</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS / Android</small>
-          </div>
-        </a>
-
-        <a id="btnImportShadowrocket" class="import-app-card" href="#">
-          <i class="fa-solid fa-rocket"></i>
-          <div>
-            <div>Shadowrocket</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS</small>
-          </div>
-        </a>
-
-        <a id="btnImportStreisand" class="import-app-card" href="#">
-          <i class="fa-brands fa-apple"></i>
-          <div>
-            <div>Streisand</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS</small>
-          </div>
-        </a>
-
-        <a id="btnImportHapp" class="import-app-card" href="#">
-          <i class="fa-solid fa-feather-pointed"></i>
-          <div>
-            <div>Happ</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS / Android</small>
-          </div>
-        </a>
-
-        <a id="btnImportHiddify" class="import-app-card" href="#">
-          <i class="fa-solid fa-shield-halved"></i>
-          <div>
-            <div>Hiddify</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
-          </div>
-        </a>
-
-        <a id="btnImportSingBox" class="import-app-card" href="#">
-          <i class="fa-solid fa-box-archive"></i>
-          <div>
-            <div>Sing-box</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
-          </div>
-        </a>
-
-        <a id="btnImportIncy" class="import-app-card" href="#">
-          <i class="fa-solid fa-compass"></i>
-          <div>
-            <div>Incy</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
-          </div>
-        </a>
-
-        <a id="btnImportV2RayTun" class="import-app-card" href="#">
-          <i class="fa-solid fa-paper-plane"></i>
-          <div>
-            <div>V2RayTun</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS / Android</small>
-          </div>
-        </a>
-
-        <a id="btnImportClash" class="import-app-card" href="#">
-          <i class="fa-solid fa-cat"></i>
-          <div>
-            <div>Clash / Mihomo</div>
-            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
-          </div>
-        </a>
-      </div>
-
-      <div style="margin-top: 1.5rem; display: flex; gap: var(--space-3); flex-wrap: wrap;">
-        <button id="copyClashBtn" class="btn-icon" type="button" style="flex: 1; min-width: 180px;"><i class="fa-solid fa-cat"></i> <span id="txtCopyClash">کپی لینک Clash / Mihomo</span></button>
-        <button id="copyJsonBtn" class="btn-icon" type="button" style="flex: 1; min-width: 180px;"><i class="fa-solid fa-file-code"></i> <span id="txtCopyJson">کپی لینک JSON / Sing-box</span></button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 4: APPS -->
-  <div id="tab-apps" class="tab-page">
-    <div class="glass-panel" style="padding: 1.5rem;">
-      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;"><i class="fa-solid fa-download"></i><strong id="appsTitleApp">برنامه‌های پیشنهادی</strong></div>
-      <div id="appsGridContainer" class="apps-grid"></div>
-    </div>
-  </div>
   <!-- FOOTER -->
   <footer class="glass-panel" style="margin-top: var(--space-4); padding: var(--space-3) var(--space-4); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-2); font-size: 0.8rem; color: var(--text-secondary); border-radius: var(--radius-lg);">
     <div>
@@ -1561,6 +1799,9 @@
 <div id="toastMessage" class="toast">Copied!</div>
 
 <script>
+  // ======================== LOCAL OFFLINE QR GENERATOR (ZERO EXTERNAL REQUESTS) ========================
+  var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,this.parsedData=this.parsedData.concat(b)}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length+"/"+b);for(var c=0;c<a.length&&0==a[c];)c++;this.num=new Array(a.length-c+b);for(var d=0;d<a.length-c;d++)this.num[d]=a[d+c]}function j(a,b){this.totalCount=a,this.dataCount=b}function k(){this.buffer=[],this.length=0}function m(){return"undefined"!=typeof CanvasRenderingContext2D}function n(){var a=!1,b=navigator.userAgent;return/android/i.test(b)&&(a=!0,aMat=b.toString().match(/android ([0-9]\.[0-9])/i),aMat&&aMat[1]&&(a=parseFloat(aMat[1]))),a}function r(a,b){for(var c=1,e=s(a),f=0,g=l.length;g>=f;f++){var h=0;switch(b){case d.L:h=l[f][0];break;case d.M:h=l[f][1];break;case d.Q:h=l[f][2];break;case d.H:h=l[f][3]}if(h>=e)break;c++}if(c>l.length)throw new Error("Too long data");return c}function s(a){var b=encodeURI(a).toString().replace(/\%[0-9a-fA-F]{2}/g,"a");return b.length+(b.length!=a?3:0)}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}},b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),this.typeNumber>=7&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>=a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>=b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=f.getLostPoint(this);(0==c||a>d)&&(a=d,b=c)}return b},createMovieClip:function(a,b,c){var d=a.createEmptyMovieClip(b,c),e=1;this.make();for(var f=0;f<this.modules.length;f++)for(var g=f*e,h=0;h<this.modules[f].length;h++){var i=h*e,j=this.modules[f][h];j&&(d.beginFill(0,100),d.moveTo(i,g),d.lineTo(i+e,g),d.lineTo(i+e,g+e),d.lineTo(i,g+e),d.endFill())}return d},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=f.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var g=-2;2>=g;g++)for(var h=-2;2>=h;h++)this.modules[d+g][e+h]=-2==g||2==g||-2==h||2==h||0==g&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=f.getBCHTypeNumber(this.typeNumber),c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var c=0;18>c;c++){var d=!a&&1==(1&b>>c);this.modules[c%3+this.moduleCount-8-3][Math.floor(c/3)]=d}},setupTypeInfo:function(a,b){for(var c=this.errorCorrectLevel<<3|b,d=f.getBCHTypeInfo(c),e=0;15>e;e++){var g=!a&&1==(1&d>>e);6>e?this.modules[e][8]=g:8>e?this.modules[e+1][8]=g:this.modules[this.moduleCount-15+e][8]=g}for(var e=0;15>e;e++){var g=!a&&1==(1&d>>e);8>e?this.modules[8][this.moduleCount-e-1]=g:9>e?this.modules[8][15-e-1+1]=g:this.modules[8][15-e-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,g=0,h=this.moduleCount-1;h>0;h-=2)for(6==h&&h--;;){for(var i=0;2>i;i++)if(null==this.modules[d][h-i]){var j=!1;g<a.length&&(j=1==(1&a[g]>>>e));var k=f.getMask(b,d,h-i);k&&(j=!j),this.modules[d][h-i]=j,e--,-1==e&&(g++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},b.PAD0=236,b.PAD1=17,b.createData=function(a,c,d){for(var e=j.getRSBlocks(a,c),g=new k,h=0;h<d.length;h++){var i=d[h];g.put(i.mode,4),g.put(i.getLength(),f.getLengthInBits(i.mode,a)),i.write(g)}for(var l=0,h=0;h<e.length;h++)l+=e[h].dataCount;if(g.getLengthInBits()>8*l)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*l+")");for(g.getLengthInBits()+4<=8*l&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*l)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*l)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},b.createBytes=function(a,b){for(var c=0,d=0,e=0,g=new Array(b.length),h=new Array(b.length),j=0;j<b.length;j++){var k=b[j].dataCount,l=b[j].totalCount-k;d=Math.max(d,k),e=Math.max(e,l),g[j]=new Array(k);for(var m=0;m<g[j].length;m++)g[j][m]=255&a.buffer[m+c];c+=k;var n=f.getErrorCorrectPolynomial(l),o=new i(g[j],n.getLength()-1),p=o.mod(n);h[j]=new Array(n.getLength()-1);for(var m=0;m<h[j].length;m++){var q=m+p.getLength()-h[j].length;h[j][m]=q>=0?p.get(q):0}}for(var r=0,m=0;m<b.length;m++)r+=b[m].totalCount;for(var s=new Array(r),t=0,m=0;d>m;m++)for(var j=0;j<b.length;j++)m<g[j].length&&(s[t++]=g[j][m]);for(var m=0;e>m;m++)for(var j=0;j<b.length;j++)m<h[j].length&&(s[t++]=h[j][m]);return s};for(var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7},f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(a){for(var b=a<<10;f.getBCHDigit(b)-f.getBCHDigit(f.G15)>=0;)b^=f.G15<<f.getBCHDigit(b)-f.getBCHDigit(f.G15);return(a<<10|b)^f.G15_MASK},getBCHTypeNumber:function(a){for(var b=a<<12;f.getBCHDigit(b)-f.getBCHDigit(f.G18)>=0;)b^=f.G18<<f.getBCHDigit(b)-f.getBCHDigit(f.G18);return a<<12|b},getBCHDigit:function(a){for(var b=0;0!=a;)b++,a>>>=1;return b},getPatternPosition:function(a){return f.PATTERN_POSITION_TABLE[a-1]},getMask:function(a,b,c){switch(a){case e.PATTERN000:return 0==(b+c)%2;case e.PATTERN001:return 0==b%2;case e.PATTERN010:return 0==c%3;case e.PATTERN011:return 0==(b+c)%3;case e.PATTERN100:return 0==(Math.floor(b/2)+Math.floor(c/3))%2;case e.PATTERN101:return 0==b*c%2+b*c%3;case e.PATTERN110:return 0==(b*c%2+b*c%3)%2;case e.PATTERN111:return 0==(b*c%3+(b+c)%2)%2;default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new i([1],0),c=0;a>c;c++)b=b.multiply(new i([1,g.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(41>b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getLostPoint:function(a){for(var b=a.getModuleCount(),c=0,d=0;b>d;d++)for(var e=0;b>e;e++){for(var f=0,g=a.isDark(d,e),h=-1;1>=h;h++)if(!(0>d+h||d+h>=b))for(var i=-1;1>=i;i++)0>e+i||e+i>=b||(0!=h||0!=i)&&g==a.isDark(d+h,e+i)&&f++;f>5&&(c+=3+f-5)}for(var d=0;b-1>d;d++)for(var e=0;b-1>e;e++){var j=0;a.isDark(d,e)&&j++,a.isDark(d+1,e)&&j++,a.isDark(d,e+1)&&j++,a.isDark(d+1,e+1)&&j++,(0==j||4==j)&&(c+=3)}for(var d=0;b>d;d++)for(var e=0;b-6>e;e++)a.isDark(d,e)&&!a.isDark(d,e+1)&&a.isDark(d,e+2)&&a.isDark(d,e+3)&&a.isDark(d,e+4)&&!a.isDark(d,e+5)&&a.isDark(d,e+6)&&(c+=40);for(var e=0;b>e;e++)for(var d=0;b-6>d;d++)a.isDark(d,e)&&!a.isDark(d+1,e)&&a.isDark(d+2,e)&&a.isDark(d+3,e)&&a.isDark(d+4,e)&&!a.isDark(d+5,e)&&a.isDark(d+6,e)&&(c+=40);for(var k=0,e=0;b>e;e++)for(var d=0;b>d;d++)a.isDark(d,e)&&k++;var l=Math.abs(100*k/b/b-50)/5;return c+=10*l}},g={glog:function(a){if(1>a)throw new Error("glog("+a+")");return g.LOG_TABLE[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return g.EXP_TABLE[a]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)},h=0;8>h;h++)g.EXP_TABLE[h]=1<<h;for(var h=8;256>h;h++)g.EXP_TABLE[h]=g.EXP_TABLE[h-4]^g.EXP_TABLE[h-5]^g.EXP_TABLE[h-6]^g.EXP_TABLE[h-8];for(var h=0;255>h;h++)g.LOG_TABLE[g.EXP_TABLE[h]]=h;i.prototype={get:function(a){return this.num[a]},getLength:function(){return this.num.length},multiply:function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=g.gexp(g.glog(this.get(c))+g.glog(a.get(d)));return new i(b,0)},mod:function(a){if(this.getLength()-a.getLength()<0)return this;for(var b=g.glog(this.get(0))-g.glog(a.get(0)),c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=g.gexp(g.glog(a.get(d))+b);return new i(c,0).mod(a)}},j.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],j.getRSBlocks=function(a,b){var c=j.getRsBlockTable(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],k=0;g>k;k++)e.push(new j(h,i));return e},j.getRsBlockTable=function(a,b){switch(b){case d.L:return j.RS_BLOCK_TABLE[4*(a-1)+0];case d.M:return j.RS_BLOCK_TABLE[4*(a-1)+1];case d.Q:return j.RS_BLOCK_TABLE[4*(a-1)+2];case d.H:return j.RS_BLOCK_TABLE[4*(a-1)+3];default:return void 0}},k.prototype={get:function(a){var b=Math.floor(a/8);return 1==(1&this.buffer[b]>>>7-a%8)},put:function(a,b){for(var c=0;b>c;c++)this.putBit(1==(1&a>>>b-c-1))},getLengthInBits:function(){return this.length},putBit:function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var l=[[17,14,11,7],[32,26,20,14],[53,42,32,24],[78,62,46,34],[106,84,60,44],[134,106,74,58],[154,122,86,64],[192,152,108,84],[230,180,130,98],[271,213,151,119],[321,251,177,137],[367,287,203,155],[425,331,241,177],[458,362,258,194],[520,412,292,220],[586,450,322,250],[644,504,364,280],[718,560,394,310],[792,624,442,338],[858,666,482,382],[929,711,509,403],[1003,779,565,439],[1091,857,611,461],[1171,911,661,511],[1273,997,715,535],[1367,1059,751,593],[1465,1125,805,625],[1528,1190,868,658],[1628,1264,908,698],[1732,1370,982,742],[1840,1452,1030,790],[1952,1538,1112,842],[2068,1628,1168,898],[2188,1722,1228,958],[2303,1809,1283,983],[2431,1911,1351,1051],[2563,1989,1423,1093],[2699,2099,1499,1139],[2809,2213,1579,1219],[2953,2331,1663,1273]],o=function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){function g(a,b){var c=document.createElementNS("http://www.w3.org/2000/svg",a);for(var d in b)b.hasOwnProperty(d)&&c.setAttribute(d,b[d]);return c}var b=this._htOption,c=this._el,d=a.getModuleCount();Math.floor(b.width/d),Math.floor(b.height/d),this.clear();var h=g("svg",{viewBox:"0 0 "+String(d)+" "+String(d),width:"100%",height:"100%",fill:b.colorLight});h.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xlink","http://www.w3.org/1999/xlink"),c.appendChild(h),h.appendChild(g("rect",{fill:b.colorDark,width:"1",height:"1",id:"template"}));for(var i=0;d>i;i++)for(var j=0;d>j;j++)if(a.isDark(i,j)){var k=g("use",{x:String(i),y:String(j)});k.setAttributeNS("http://www.w3.org/1999/xlink","href","#template"),h.appendChild(k)}},a.prototype.clear=function(){for(;this._el.hasChildNodes();)this._el.removeChild(this._el.lastChild)},a}(),p="svg"===document.documentElement.tagName.toLowerCase(),q=p?o:m()?function(){function a(){this._elImage.src=this._elCanvas.toDataURL("image/png"),this._elImage.style.display="block",this._elCanvas.style.display="none"}function d(a,b){var c=this;if(c._fFail=b,c._fSuccess=a,null===c._bSupportDataURI){var d=document.createElement("img"),e=function(){c._bSupportDataURI=!1,c._fFail&&_fFail.call(c)},f=function(){c._bSupportDataURI=!0,c._fSuccess&&c._fSuccess.call(c)};return d.onabort=e,d.onerror=e,d.onload=f,d.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",void 0}c._bSupportDataURI===!0&&c._fSuccess?c._fSuccess.call(c):c._bSupportDataURI===!1&&c._fFail&&c._fFail.call(c)}if(this._android&&this._android<=2.1){var b=1/window.devicePixelRatio,c=CanvasRenderingContext2D.prototype.drawImage;CanvasRenderingContext2D.prototype.drawImage=function(a,d,e,f,g,h,i,j){if("nodeName"in a&&/img/i.test(a.nodeName))for(var l=arguments.length-1;l>=1;l--)arguments[l]=arguments[l]*b;else"undefined"==typeof j&&(arguments[1]*=b,arguments[2]*=b,arguments[3]*=b,arguments[4]*=b);c.apply(this,arguments)}}var e=function(a,b){this._bIsPainted=!1,this._android=n(),this._htOption=b,this._elCanvas=document.createElement("canvas"),this._elCanvas.width=b.width,this._elCanvas.height=b.height,a.appendChild(this._elCanvas),this._el=a,this._oContext=this._elCanvas.getContext("2d"),this._bIsPainted=!1,this._elImage=document.createElement("img"),this._elImage.style.display="none",this._el.appendChild(this._elImage),this._bSupportDataURI=null};return e.prototype.draw=function(a){var b=this._elImage,c=this._oContext,d=this._htOption,e=a.getModuleCount(),f=d.width/e,g=d.height/e,h=Math.round(f),i=Math.round(g);b.style.display="none",this.clear();for(var j=0;e>j;j++)for(var k=0;e>k;k++){var l=a.isDark(j,k),m=k*f,n=j*g;c.strokeStyle=l?d.colorDark:d.colorLight,c.lineWidth=1,c.fillStyle=l?d.colorDark:d.colorLight,c.fillRect(m,n,f,g),c.strokeRect(Math.floor(m)+.5,Math.floor(n)+.5,h,i),c.strokeRect(Math.ceil(m)-.5,Math.ceil(n)-.5,h,i)}this._bIsPainted=!0},e.prototype.makeImage=function(){this._bIsPainted&&d.call(this,a)},e.prototype.isPainted=function(){return this._bIsPainted},e.prototype.clear=function(){this._oContext.clearRect(0,0,this._elCanvas.width,this._elCanvas.height),this._bIsPainted=!1},e.prototype.round=function(a){return a?Math.floor(1e3*a)/1e3:a},e}():function(){var a=function(a,b){this._el=a,this._htOption=b};return a.prototype.draw=function(a){for(var b=this._htOption,c=this._el,d=a.getModuleCount(),e=Math.floor(b.width/d),f=Math.floor(b.height/d),g=['<table style="border:0;border-collapse:collapse;">'],h=0;d>h;h++){g.push("<tr>");for(var i=0;d>i;i++)g.push('<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:'+e+"px;height:"+f+"px;background-color:"+(a.isDark(h,i)?b.colorDark:b.colorLight)+';"></td>');g.push("</tr>")}g.push("</table>"),c.innerHTML=g.join("");var j=c.childNodes[0],k=(b.width-j.offsetWidth)/2,l=(b.height-j.offsetHeight)/2;k>0&&l>0&&(j.style.margin=l+"px "+k+"px")},a.prototype.clear=function(){this._el.innerHTML=""},a}();QRCode=function(a,b){if(this._htOption={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H},"string"==typeof b&&(b={text:b}),b)for(var c in b)this._htOption[c]=b[c];"string"==typeof a&&(a=document.getElementById(a)),this._android=n(),this._el=a,this._oQRCode=null,this._oDrawing=new q(this._el,this._htOption),this._htOption.text&&this.makeCode(this._htOption.text)},QRCode.prototype.makeCode=function(a){this._oQRCode=new b(r(a,this._htOption.correctLevel),this._htOption.correctLevel),this._oQRCode.addData(a),this._oQRCode.make(),this._el.title=a,this._oDrawing.draw(this._oQRCode),this.makeImage()},QRCode.prototype.makeImage=function(){"function"==typeof this._oDrawing.makeImage&&(!this._android||this._android>=3)&&this._oDrawing.makeImage()},QRCode.prototype.clear=function(){this._oDrawing.clear()},QRCode.CorrectLevel=d}();
+
   // ======================== VARIABLES FROM BACKEND ========================
   const templateVars = {
     sId: "{{ .sId }}", enabled: "{{ .enabled }}", isOnline: "{{ .isOnline }}",
@@ -1652,8 +1893,8 @@
 
   // i18n
   const locales = {
-    fa: { used: "مصرف شده", usage: "مصرف", total: "کل حجم", remain: "باقی‌مانده", expiry: "انقضا", days: "روز", hours: "ساعت", minutes: "دقیقه", copy: "کپی لینک", qr: "QR", active: "فعال", inactive: "غیرفعال", unlimited: "نامحدود", copyDone: "کپی شد!", copyFail: "خطا", download: "دریافت", upload: "ارسال", configTitle: "کانفیگ‌ها", appsTitle: "دانلود اپلیکیشن", noConfig: "کانفیگی موجود نیست", lastOnline: "آخرین آنلاین", timeExpired: "منقضی شده", timeUnlimited: "نامحدود", remainTime: "زمان باقیمانده", expireDateFormat: "روز / ساعت / دقیقه", subscriptionHub: "پنل اشتراک", volumeUnit: "گیگابایت", tabDashboard: "وضعیت", tabConfigs: "کانفیگ‌ها", tabImport: "اتصال سریع", tabApps: "برنامه‌ها", copyAll: "کپی همه کانفیگ‌ها", quickImport: "افزودن مستقیم به نرم‌افزارها", searchConfigs: "جستجو در بین کانفیگ‌ها..." },
-    en: { used: "Used", usage: "Usage", total: "Total", remain: "Remaining", expiry: "Expiry", days: "Days", hours: "Hours", minutes: "Mins", copy: "Copy Link", qr: "QR", active: "Active", inactive: "Inactive", unlimited: "Unlimited", copyDone: "Copied!", copyFail: "Failed", download: "Download", upload: "Upload", configTitle: "Configs", appsTitle: "Client Apps", noConfig: "No configs available", lastOnline: "Last online", timeExpired: "Expired", timeUnlimited: "No limit", remainTime: "Remaining time", expireDateFormat: "day / hour / min", subscriptionHub: "Subscription Hub", volumeUnit: "GB", tabDashboard: "Dashboard", tabConfigs: "Configs", tabImport: "Quick Import", tabApps: "Apps", copyAll: "Copy All Configs", quickImport: "One-Click Client Import", searchConfigs: "Search configs..." }
+    fa: { used: "مصرف شده", usage: "مصرف", total: "کل حجم", remain: "باقی‌مانده", expiry: "انقضا", days: "روز", hours: "ساعت", minutes: "دقیقه", copy: "کپی لینک", qr: "QR", active: "فعال", inactive: "غیرفعال", unlimited: "نامحدود", copyDone: "کپی شد!", copyFail: "خطا", download: "دریافت", upload: "ارسال", configTitle: "کانفیگ‌ها", appsTitle: "دانلود اپلیکیشن", noConfig: "کانفیگی موجود نیست", lastOnline: "آخرین آنلاین", timeExpired: "منقضی شده", timeUnlimited: "نامحدود", remainTime: "زمان باقیمانده", expireDateFormat: "روز / ساعت / دقیقه", subscriptionHub: "پنل اشتراک", volumeUnit: "گیگابایت", tabDashboard: "وضعیت", tabConfigs: "کانفیگ‌ها", tabImport: "اتصال سریع", tabApps: "برنامه‌ها", copyAll: "کپی همه کانفیگ‌ها", quickImport: "اتصال سریع", searchConfigs: "جستجو در بین کانفیگ‌ها...", subGeneral: "اشتراک معمولی (Base64)", subJson: "اشتراک Sing-box (JSON)", subClash: "اشتراک Clash / Mihomo", openInApp: "افزودن به برنامه", downloadApp: "دانلود نرم‌افزار", scanTitle: "اسکن با گوشی", scanHint: "این کد را در اپلیکیشن VPN اسکن کنید تا اشتراک بدون کپی‌کردن لینک اضافه شود.", saveQr: "ذخیره تصویر QR", qrTitle: "اسکن QR اشتراک" },
+    en: { used: "Used", usage: "Usage", total: "Total", remain: "Remaining", expiry: "Expiry", days: "Days", hours: "Hours", minutes: "Mins", copy: "Copy Link", qr: "QR", active: "Active", inactive: "Inactive", unlimited: "Unlimited", copyDone: "Copied!", copyFail: "Failed", download: "Download", upload: "Upload", configTitle: "Configs", appsTitle: "Client Apps", noConfig: "No configs available", lastOnline: "Last online", timeExpired: "Expired", timeUnlimited: "No limit", remainTime: "Remaining time", expireDateFormat: "day / hour / min", subscriptionHub: "Subscription Hub", volumeUnit: "GB", tabDashboard: "Dashboard", tabConfigs: "Configs", tabImport: "Quick Import", tabApps: "Apps", copyAll: "Copy All Configs", quickImport: "Quick Connect", searchConfigs: "Search configs...", subGeneral: "Subscription (Base64)", subJson: "Sing-box JSON", subClash: "Clash / Mihomo", openInApp: "Add to App", downloadApp: "Download App", scanTitle: "Scan with Phone", scanHint: "Scan this QR in your VPN app to import subscription directly without copying.", saveQr: "Save QR Image", qrTitle: "Subscription QR Code" }
   };
   let currentLang = localStorage.getItem("nexus_lang") || "fa";
   // ======================== UI & THEME ========================
@@ -1812,14 +2053,60 @@
 
   // DOM helpers
   function showToast(msg) { let toast = document.getElementById("toastMessage"); toast.innerText = msg; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 1700); }
+  let currentQrData = "";
+  let inpageQrInstance = null;
+  let modalQrInstance = null;
+
   function showQR(data, title, label) { 
     if (!data) { showToast(t("copyFail")); return; }
-    document.getElementById("modalQrTitle").innerText = title; 
-    document.getElementById("qrModalImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(data)}`; 
+    currentQrData = data;
+    document.getElementById("modalQrTitle").innerText = title || t("qrTitle"); 
     document.getElementById("qrModalText").innerText = label || data; 
+    
+    const container = document.getElementById("qrModalContainer");
+    container.innerHTML = "";
+    modalQrInstance = new QRCode(container, {
+      text: data,
+      width: 230,
+      height: 230,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
     document.getElementById("qrModal").classList.add("show"); 
   }
+
   function closeModal() { document.getElementById("qrModal").classList.remove("show"); }
+
+  function saveQrFromElement(containerId, filename) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const canvas = container.querySelector("canvas");
+    const img = container.querySelector("img");
+    const dataUrl = canvas ? canvas.toDataURL("image/png") : (img ? img.src : "");
+    if (!dataUrl) { showToast(t("copyFail")); return; }
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = (filename || "qrcode") + ".png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function renderInpageQr() {
+    const container = document.getElementById("inpageQrContainer");
+    if (!container || !subLink) return;
+    container.innerHTML = "";
+    inpageQrInstance = new QRCode(container, {
+      text: subLink,
+      width: 120,
+      height: 120,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  }
   async function copyText(text, successMsg) { 
     if (!text) { showToast(t("copyFail")); return; }
     try { await navigator.clipboard.writeText(text); showToast(successMsg); } catch(e) { showToast(t("copyFail")); } 
@@ -2055,7 +2342,17 @@
     document.getElementById("tabNavImport").innerText = t("tabImport");
     document.getElementById("tabNavApps").innerText = t("tabApps");
     if (document.getElementById("lblCopyAll")) document.getElementById("lblCopyAll").innerText = t("copyAll");
-    if (document.getElementById("quickImportHeaderTitle")) document.getElementById("quickImportHeaderTitle").innerText = t("quickImport");
+    if (document.getElementById("quickLinksTitle")) document.getElementById("quickLinksTitle").innerText = t("quickImport");
+    if (document.getElementById("appsHeaderTitle")) document.getElementById("appsHeaderTitle").innerText = t("appsTitle");
+    if (document.getElementById("inpageScanTitle")) document.getElementById("inpageScanTitle").innerText = t("scanTitle");
+    if (document.getElementById("inpageScanHint")) document.getElementById("inpageScanHint").innerText = t("scanHint");
+    if (document.getElementById("lblSaveInpageQr")) document.getElementById("lblSaveInpageQr").innerText = t("saveQr");
+    if (document.getElementById("lblCopyInpageSub")) document.getElementById("lblCopyInpageSub").innerText = t("copy");
+    if (document.getElementById("modalCopyLabel")) document.getElementById("modalCopyLabel").innerText = t("copy");
+    if (document.getElementById("modalSaveQrLabel")) document.getElementById("modalSaveQrLabel").innerText = t("saveQr");
+    if (document.getElementById("lblSubStandard")) document.getElementById("lblSubStandard").innerText = t("subGeneral");
+    if (document.getElementById("lblSubJson")) document.getElementById("lblSubJson").innerText = t("subJson");
+    if (document.getElementById("lblSubClash")) document.getElementById("lblSubClash").innerText = t("subClash");
     if (document.getElementById("configSearchInput")) document.getElementById("configSearchInput").placeholder = t("searchConfigs");
     document.getElementById("copyMainBtn").setAttribute("aria-label", t("copy"));
     document.getElementById("copyMainBtn").setAttribute("title", t("copy"));
@@ -2137,64 +2434,360 @@
   });
 
   // ======================== QUICK APP BUTTONS ========================
-  function setupQuickAppButtons() {
-    const encSub = encodeURIComponent(subLink);
-    const titleClean = normalize(templateVars.subTitle, templateVars.sId || "3x-Hub");
-    const titleEnc = encodeURIComponent(titleClean);
-    const rocketSource = `${subLink}${subLink.includes('?') ? '&' : '?'}flag=shadowrocket`;
-    const clashTarget = normalize(templateVars.subClashUrl, subLink);
-
-    const elV2rayNG = document.getElementById("btnImportV2rayNG");
-    if (elV2rayNG) elV2rayNG.href = `v2rayng://install-config?url=${encSub}`;
-
-    const elV2Box = document.getElementById("btnImportV2Box");
-    if (elV2Box) elV2Box.href = `v2box://install-sub?url=${encSub}&name=${titleEnc}`;
-
-    const elRocket = document.getElementById("btnImportShadowrocket");
-    if (elRocket) elRocket.href = `shadowrocket://add/sub://${btoa(rocketSource)}?remark=${titleEnc}`;
-
-    const elStreisand = document.getElementById("btnImportStreisand");
-    if (elStreisand) elStreisand.href = `streisand://import/${encSub}`;
-
-    const elHapp = document.getElementById("btnImportHapp");
-    if (elHapp) elHapp.href = `happ://add/${subLink}`;
-
-    const elHiddify = document.getElementById("btnImportHiddify");
-    if (elHiddify) elHiddify.href = `hiddify://install-config?url=${encSub}#${titleEnc}`;
-
-    const elSingBox = document.getElementById("btnImportSingBox");
-    if (elSingBox) elSingBox.href = `sing-box://import-remote-profile?url=${encSub}#${titleEnc}`;
-
-    const elIncy = document.getElementById("btnImportIncy");
-    if (elIncy) elIncy.href = `incy://add/${subLink}`;
-
-    const elV2RayTun = document.getElementById("btnImportV2RayTun");
-    if (elV2RayTun) elV2RayTun.href = `v2raytun://import/${subLink}`;
-
-    const elClash = document.getElementById("btnImportClash");
-    if (elClash) elClash.href = `clash://install-config?url=${encodeURIComponent(clashTarget)}&name=${titleEnc}`;
+  
+  // ======================== OFFICIAL 3X-UI APPS & LINKS MODEL ========================
+  function detectClientPlatform() {
+    const ua = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua)) return "ios";
+    if (/macintosh|mac os x/.test(ua)) return "macos";
+    if (/windows|win32|win64/.test(ua)) return "windows";
+    return "android";
   }
 
-  // Copy All Configs
-  document.getElementById("copyAllConfigsBtn")?.addEventListener("click", () => {
-    if (!configsList.length) { showToast(t("copyFail")); return; }
-    copyText(configsList.join("\n"), t("copyDone"));
-  });
+  let activePlatform = detectClientPlatform();
 
-  // Copy Clash / JSON
-  document.getElementById("copyClashBtn")?.addEventListener("click", () => {
+  function getPlatformApps() {
+    const encSub = encodeURIComponent(subLink);
+    const titleClean = normalize(templateVars.subTitle, templateVars.sId || "Subscription");
+    const titleEnc = encodeURIComponent(titleClean);
+    const sIdEnc = encodeURIComponent(templateVars.sId || "");
+    const rocketSource = `${subLink}${subLink.includes('?') ? '&' : '?'}flag=shadowrocket`;
+    const rocketRemark = encodeURIComponent(titleClean);
     const clashTarget = normalize(templateVars.subClashUrl, subLink);
-    copyText(clashTarget, t("copyDone"));
+
+    return {
+      android: [
+        {
+          name: "V2Box",
+          tag: "V2Ray & Xray Client",
+          icon: "fa-solid fa-cube",
+          importUrl: `v2box://install-sub?url=${encSub}&name=${sIdEnc}`,
+          downloadUrl: "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box",
+          downloadLabel: "Google Play"
+        },
+        {
+          name: "v2rayNG",
+          tag: "Android Client",
+          icon: "fa-brands fa-android",
+          importUrl: `v2rayng://install-config?url=${encSub}`,
+          downloadUrl: "https://github.com/2dust/v2rayNG/releases",
+          downloadLabel: "GitHub"
+        },
+        {
+          name: "Sing-box",
+          tag: "Universal Core",
+          icon: "fa-solid fa-box-archive",
+          importUrl: `sing-box://import-remote-profile?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://github.com/SagerNet/sing-box/releases",
+          downloadLabel: "GitHub"
+        },
+        {
+          name: "V2RayTun",
+          tag: "Fast & Lightweight",
+          icon: "fa-solid fa-paper-plane",
+          importUrl: `v2raytun://import/${subLink}`,
+          downloadUrl: "https://play.google.com/store/apps/details?id=com.v2raytun.android",
+          downloadLabel: "Google Play"
+        },
+        {
+          name: "Happ",
+          tag: "Modern Proxy",
+          icon: "fa-solid fa-feather-pointed",
+          importUrl: `happ://add/${subLink}`,
+          downloadUrl: "https://happ.app/",
+          downloadLabel: "Website"
+        },
+        {
+          name: "Incy",
+          tag: "Next-gen Client",
+          icon: "fa-solid fa-compass",
+          importUrl: `incy://add/${subLink}`,
+          downloadUrl: "https://play.google.com/store/apps/details?id=im.getincy.app",
+          downloadLabel: "Google Play"
+        },
+        {
+          name: "Hiddify",
+          tag: "Sing-box Based",
+          icon: "fa-solid fa-shield-halved",
+          importUrl: `hiddify://install-config?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://github.com/hiddify/hiddify-app/releases",
+          downloadLabel: "GitHub"
+        }
+      ],
+      ios: [
+        {
+          name: "Shadowrocket",
+          tag: "Pro iOS Proxy",
+          icon: "fa-solid fa-rocket",
+          importUrl: `shadowrocket://add/sub://${btoa(rocketSource)}?remark=${rocketRemark}`,
+          downloadUrl: "https://apps.apple.com/app/shadowrocket/id932747118",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "V2Box",
+          tag: "V2Ray & Xray Client",
+          icon: "fa-solid fa-cube",
+          importUrl: `v2box://install-sub?url=${encSub}&name=${sIdEnc}`,
+          downloadUrl: "https://apps.apple.com/app/v2box-v2ray-client/id6446814042",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "Streisand",
+          tag: "Fast iOS Client",
+          icon: "fa-brands fa-apple",
+          importUrl: `streisand://import/${encSub}`,
+          downloadUrl: "https://apps.apple.com/app/streisand/id6450534064",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "V2RayTun",
+          tag: "Simple & Clean",
+          icon: "fa-solid fa-paper-plane",
+          importUrl: `v2raytun://import/${subLink}`,
+          downloadUrl: "https://apps.apple.com/app/v2raytun/id6476628114",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "Sing-box",
+          tag: "Universal Core",
+          icon: "fa-solid fa-box-archive",
+          importUrl: `sing-box://import-remote-profile?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://apps.apple.com/app/sing-box/id6451272673",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "Happ",
+          tag: "Modern Proxy",
+          icon: "fa-solid fa-feather-pointed",
+          importUrl: `happ://add/${subLink}`,
+          downloadUrl: "https://happ.app/",
+          downloadLabel: "Website"
+        },
+        {
+          name: "Incy",
+          tag: "Minimal Client",
+          icon: "fa-solid fa-compass",
+          importUrl: `incy://add/${subLink}`,
+          downloadUrl: "https://apps.apple.com/app/incy/id6477759888",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "Hiddify",
+          tag: "Sing-box Based",
+          icon: "fa-solid fa-shield-halved",
+          importUrl: `hiddify://install-config?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://apps.apple.com/app/hiddify-next/id6472477322",
+          downloadLabel: "App Store"
+        }
+      ],
+      windows: [
+        {
+          name: "v2rayN",
+          tag: "Most Popular Windows Client",
+          icon: "fa-brands fa-windows",
+          importUrl: "",
+          downloadUrl: "https://github.com/2dust/v2rayN/releases",
+          downloadLabel: "GitHub Releases"
+        },
+        {
+          name: "Hiddify",
+          tag: "Easy Modern GUI",
+          icon: "fa-solid fa-shield-halved",
+          importUrl: `hiddify://install-config?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://github.com/hiddify/hiddify-app/releases",
+          downloadLabel: "GitHub Releases"
+        },
+        {
+          name: "Clash Verge Rev",
+          tag: "Mihomo / Clash Core",
+          icon: "fa-solid fa-cat",
+          importUrl: `clash://install-config?url=${encodeURIComponent(clashTarget)}&name=${titleEnc}`,
+          downloadUrl: "https://github.com/clash-verge-rev/clash-verge-rev/releases",
+          downloadLabel: "GitHub Releases"
+        },
+        {
+          name: "Sing-box",
+          tag: "Sing-box Core",
+          icon: "fa-solid fa-box-archive",
+          importUrl: `sing-box://import-remote-profile?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://github.com/SagerNet/sing-box/releases",
+          downloadLabel: "GitHub Releases"
+        },
+        {
+          name: "Nekoray",
+          tag: "Cross-platform Core",
+          icon: "fa-solid fa-network-wired",
+          importUrl: "",
+          downloadUrl: "https://github.com/MatsuriDayo/nekoray/releases",
+          downloadLabel: "GitHub Releases"
+        }
+      ],
+      macos: [
+        {
+          name: "V2Box",
+          tag: "Mac App Store",
+          icon: "fa-solid fa-cube",
+          importUrl: `v2box://install-sub?url=${encSub}&name=${sIdEnc}`,
+          downloadUrl: "https://apps.apple.com/app/v2box-v2ray-client/id6446814042",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "Streisand",
+          tag: "Apple Silicon & Intel",
+          icon: "fa-brands fa-apple",
+          importUrl: `streisand://import/${encSub}`,
+          downloadUrl: "https://apps.apple.com/app/streisand/id6450534064",
+          downloadLabel: "App Store"
+        },
+        {
+          name: "Hiddify",
+          tag: "Universal Mac App",
+          icon: "fa-solid fa-shield-halved",
+          importUrl: `hiddify://install-config?url=${encSub}#${titleEnc}`,
+          downloadUrl: "https://github.com/hiddify/hiddify-app/releases",
+          downloadLabel: "GitHub Releases"
+        },
+        {
+          name: "Clash Verge Rev",
+          tag: "Mihomo / Clash GUI",
+          icon: "fa-solid fa-cat",
+          importUrl: `clash://install-config?url=${encodeURIComponent(clashTarget)}&name=${titleEnc}`,
+          downloadUrl: "https://github.com/clash-verge-rev/clash-verge-rev/releases",
+          downloadLabel: "GitHub Releases"
+        }
+      ]
+    };
+  }
+
+  function renderSubLinks() {
+    // 1. SUB Standard
+    const valSubStandard = document.getElementById("valSubStandard");
+    if (valSubStandard) valSubStandard.innerText = subLink;
+
+    document.getElementById("btnCopySubStandard")?.addEventListener("click", () => {
+      copyText(subLink, t("copyDone"));
+    });
+    document.getElementById("btnQrSubStandard")?.addEventListener("click", () => {
+      showQR(subLink, t("subGeneral"), subLink);
+    });
+
+    // 2. JSON
+    const rowSubJson = document.getElementById("rowSubJson");
+    const jsonUrl = normalize(templateVars.subJsonUrl, "");
+    if (jsonUrl) {
+      if (rowSubJson) rowSubJson.style.display = "flex";
+      const valSubJson = document.getElementById("valSubJson");
+      if (valSubJson) valSubJson.innerText = jsonUrl;
+
+      const btnDl = document.getElementById("btnDownloadSubJson");
+      if (btnDl) btnDl.href = `${jsonUrl}${jsonUrl.includes("?") ? "&" : "?"}view=raw`;
+
+      document.getElementById("btnCopySubJson")?.addEventListener("click", () => {
+        copyText(jsonUrl, t("copyDone"));
+      });
+      document.getElementById("btnQrSubJson")?.addEventListener("click", () => {
+        showQR(jsonUrl, t("subJson"), jsonUrl);
+      });
+    } else if (rowSubJson) {
+      rowSubJson.style.display = "none";
+    }
+
+    // 3. CLASH
+    const rowSubClash = document.getElementById("rowSubClash");
+    const clashUrl = normalize(templateVars.subClashUrl, "");
+    if (clashUrl) {
+      if (rowSubClash) rowSubClash.style.display = "flex";
+      const valSubClash = document.getElementById("valSubClash");
+      if (valSubClash) valSubClash.innerText = clashUrl;
+
+      const btnDl = document.getElementById("btnDownloadSubClash");
+      if (btnDl) btnDl.href = `${clashUrl}${clashUrl.includes("?") ? "&" : "?"}view=raw`;
+
+      document.getElementById("btnCopySubClash")?.addEventListener("click", () => {
+        copyText(clashUrl, t("copyDone"));
+      });
+      document.getElementById("btnQrSubClash")?.addEventListener("click", () => {
+        showQR(clashUrl, t("subClash"), clashUrl);
+      });
+    } else if (rowSubClash) {
+      rowSubClash.style.display = "none";
+    }
+
+    renderInpageQr();
+  }
+
+  function renderPlatformApps(platform) {
+    activePlatform = platform;
+    const allApps = getPlatformApps();
+    const list = allApps[platform] || allApps.android;
+    const container = document.getElementById("appsCardsContainer");
+    if (!container) return;
+
+    // update active tab button
+    document.querySelectorAll(".platform-tab-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.platform === platform);
+    });
+
+    container.innerHTML = "";
+    list.forEach(app => {
+      const card = document.createElement("div");
+      card.className = "sub-app-item-card";
+      
+      const hasImport = Boolean(app.importUrl);
+      const addBtnHtml = hasImport 
+        ? `<a href="${app.importUrl}" class="btn-icon btn-primary sub-app-btn-add"><i class="fa-solid fa-bolt"></i> <span>${t("openInApp")}</span></a>`
+        : `<button type="button" class="btn-icon btn-primary sub-app-btn-add copy-app-sub"><i class="fa-regular fa-copy"></i> <span>${t("copy")}</span></button>`;
+
+      const dlBtnHtml = app.downloadUrl
+        ? `<a href="${app.downloadUrl}" target="_blank" rel="noopener noreferrer" class="btn-icon sub-app-btn-dl" title="${t("downloadApp")}"><i class="fa-solid fa-download"></i> <span>${escapeHtml(app.downloadLabel || t("download"))}</span></a>`
+        : "";
+
+      card.innerHTML = `
+        <div class="sub-app-item-top">
+          <div class="sub-app-icon-box"><i class="${app.icon}"></i></div>
+          <div class="sub-app-meta">
+            <span class="sub-app-title">${escapeHtml(app.name)}</span>
+            <span class="sub-app-desc">${escapeHtml(app.tag || "")}</span>
+          </div>
+        </div>
+        <div class="sub-app-actions">
+          ${addBtnHtml}
+          ${dlBtnHtml}
+        </div>
+      `;
+
+      if (!hasImport) {
+        card.querySelector(".copy-app-sub")?.addEventListener("click", () => {
+          copyText(subLink, t("copyDone"));
+        });
+      }
+
+      container.appendChild(card);
+    });
+  }
+
+  function setupPlatformSwitchers() {
+    document.querySelectorAll(".platform-tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        renderPlatformApps(btn.dataset.platform);
+      });
+    });
+  }
+
+  document.getElementById("modalCopyBtn")?.addEventListener("click", () => {
+    if (currentQrData) copyText(currentQrData, t("copyDone"));
   });
 
-  document.getElementById("copyJsonBtn")?.addEventListener("click", () => {
-    const jsonTarget = normalize(templateVars.subJsonUrl, subLink);
-    copyText(jsonTarget, t("copyDone"));
+  document.getElementById("modalSaveQrBtn")?.addEventListener("click", () => {
+    saveQrFromElement("qrModalContainer", "subscription-qr");
   });
 
-  // Config Search Input
-  document.getElementById("configSearchInput")?.addEventListener("input", (e) => {
-    filterConfigs(e.target.value);
+  document.getElementById("btnSaveInpageQr")?.addEventListener("click", () => {
+    saveQrFromElement("inpageQrContainer", "sub-qr-code");
+  });
+
+  document.getElementById("btnCopyInpageSub")?.addEventListener("click", () => {
+    copyText(subLink, t("copyDone"));
   });
 
   function filterConfigs(query = "") {
@@ -2238,7 +2831,9 @@
     });
   }
 
-  setupQuickAppButtons();
+  setupPlatformSwitchers();
+    renderSubLinks();
+    renderPlatformApps(activePlatform);
   updateUI();
 </script>
 </body>
