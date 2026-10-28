@@ -985,6 +985,307 @@
       }
     }
 
+  
+    /* ======================== NEOBRUTALIST RICCARDO RAPELLI SWITCH ======================== */
+    .theme-switch-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      direction: ltr !important;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 66px;
+      height: 35px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .slider {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #38bdf8; /* daytime sky in light mode */
+      border: 2.5px solid var(--border);
+      border-radius: 999px;
+      box-shadow: 2.5px 2.5px 0px var(--border);
+      transition: background-color 0.4s ease, transform 150ms ease, box-shadow 150ms ease;
+      overflow: hidden;
+    }
+
+    .switch:hover .slider {
+      transform: translate(-1px, -1px);
+      box-shadow: 3.5px 3.5px 0px var(--border);
+    }
+
+    .switch:active .slider {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--border);
+    }
+
+    .switch input:checked + .slider {
+      background-color: #0f172a; /* nighttime sky in dark mode */
+    }
+
+    /* Sun & Moon Knob */
+    .sun-moon {
+      position: absolute;
+      height: 25px;
+      width: 25px;
+      left: 3px;
+      bottom: 2.5px;
+      background-color: #f59e0b; /* Sun */
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      box-shadow: 1px 1px 0px var(--border);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .switch input:checked + .slider .sun-moon {
+      transform: translateX(31px);
+      background-color: #e2e8f0; /* Moon */
+    }
+
+    /* Moon Craters */
+    .moon-dot {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      fill: #94a3b8;
+      position: absolute;
+    }
+
+    .switch input:checked + .slider .moon-dot {
+      opacity: 1;
+    }
+
+    #moon-dot-1 { left: 9px; top: 3px; width: 5px; height: 5px; }
+    #moon-dot-2 { left: 3px; top: 9px; width: 7px; height: 7px; }
+    #moon-dot-3 { left: 13px; top: 14px; width: 4px; height: 4px; }
+
+    /* Light Rays (Daytime) */
+    .light-ray {
+      position: absolute;
+      fill: #fef08a;
+      opacity: 0.85;
+      transition: opacity 0.35s ease;
+    }
+
+    .switch input:checked + .slider .light-ray {
+      opacity: 0;
+    }
+
+    #light-ray-1 { left: -6px; top: -6px; width: 37px; height: 37px; }
+    #light-ray-2 { left: -10px; top: -10px; width: 45px; height: 45px; opacity: 0.5; }
+    #light-ray-3 { left: -14px; top: -14px; width: 53px; height: 53px; opacity: 0.25; }
+
+    /* Clouds (Daytime) */
+    .cloud-dark, .cloud-light {
+      position: absolute;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .cloud-light { fill: #ffffff; }
+    .cloud-dark { fill: #bae6fd; }
+
+    #cloud-1 { bottom: -8px; right: 18px; width: 26px; height: 26px; }
+    #cloud-2 { bottom: -12px; right: 6px; width: 28px; height: 28px; }
+    #cloud-3 { bottom: -6px; right: -2px; width: 20px; height: 20px; }
+    #cloud-4 { bottom: -14px; right: 14px; width: 30px; height: 30px; }
+    #cloud-5 { bottom: -16px; right: 2px; width: 30px; height: 30px; }
+    #cloud-6 { bottom: -10px; right: -6px; width: 22px; height: 22px; }
+
+    .switch input:checked + .slider .cloud-dark,
+    .switch input:checked + .slider .cloud-light {
+      transform: translateY(25px);
+      opacity: 0;
+    }
+
+    /* Stars (Nighttime) */
+    .stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      fill: #ffffff;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.6);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .switch input:checked + .slider .star {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    #star-1 { width: 9px; height: 9px; top: 5px; left: 6px; }
+    #star-2 { width: 7px; height: 7px; top: 18px; left: 14px; }
+    #star-3 { width: 8px; height: 8px; top: 7px; left: 20px; }
+    #star-4 { width: 6px; height: 6px; top: 20px; left: 4px; }
+
+    /* ======================== TAB NAVIGATION & MULTI-PAGE ======================== */
+    .tab-navigation-bar {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.45rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tab-btn {
+      flex: 1;
+      border: 2px solid transparent;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--text-secondary);
+      padding: 0.65rem 1rem;
+      font-weight: 800;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+      background: var(--surface-strong);
+    }
+
+    .tab-btn.active {
+      background: var(--surface-strong);
+      color: var(--text-primary);
+      border: 2px solid var(--border);
+      box-shadow: 2px 2px 0px var(--border);
+    }
+
+    .tab-badge {
+      font-size: 0.68rem;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-weight: 900;
+    }
+
+    .tab-page {
+      display: none;
+      animation: tabFadeIn 0.22s ease;
+    }
+
+    .tab-page.active-tab {
+      display: block;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ======================== QUICK IMPORT GRID ======================== */
+    .quick-import-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .import-app-card {
+      background: var(--surface);
+      border: 2.5px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: 3px 3px 0px var(--border);
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 800;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .import-app-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--border);
+      background: var(--surface-strong);
+    }
+
+    .import-app-card:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--border);
+    }
+
+    .import-app-card i {
+      font-size: 1.45rem;
+      flex: 0 0 auto;
+    }
+
+    /* ======================== MOBILE BOTTOM NAVIGATION BAR ======================== */
+    @media (max-width: 720px) {
+      body {
+        padding-bottom: 5.5rem;
+      }
+
+      .tab-navigation-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+        z-index: 1000;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        border-top: 3px solid var(--border);
+        box-shadow: 0 -4px 0px var(--border);
+        background: var(--surface);
+        padding: 0.4rem 0.2rem calc(0.4rem + env(safe-area-inset-bottom, 0px));
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.2rem;
+      }
+
+      .tab-btn {
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 0.35rem 0.1rem;
+        font-size: 0.68rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .tab-btn i {
+        font-size: 1.15rem;
+      }
+
+      .tab-btn.active {
+        background: var(--accent-soft);
+        border: 2px solid var(--border);
+        box-shadow: 2px 2px 0px var(--border);
+      }
+    }
+
   </style>
 </head>
 <body data-fixed-version="config-scroll-v8">
@@ -1001,7 +1302,33 @@
     <div class="action-group">
       <button id="copyMainBtn" class="btn-icon btn-primary icon-only-action" type="button" aria-label="کپی لینک اشتراک" title="کپی لینک اشتراک"><i class="fa-regular fa-copy"></i></button>
       <button id="qrMainBtn" class="btn-icon icon-only-action" type="button" aria-label="نمایش QR اشتراک" title="نمایش QR اشتراک"><i class="fa-solid fa-qrcode"></i></button>
-      <button id="themeToggleBtn" class="btn-icon circle-btn" type="button" aria-label="تغییر حالت روشن و تاریک"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
+      <div class="theme-switch-wrapper">
+        <label class="switch" title="تغییر حالت روشن و تاریک">
+          <input id="themeSwitch" type="checkbox" />
+          <div class="slider round">
+            <div class="sun-moon">
+              <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+              <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+            </div>
+            <div class="stars">
+              <svg id="star-1" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+              <svg id="star-2" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+              <svg id="star-3" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+              <svg id="star-4" class="star" viewBox="0 0 20 20"><path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path></svg>
+            </div>
+          </div>
+        </label>
+      </div>
       <button id="langToggleBtn" class="btn-icon circle-btn" type="button" aria-label="تغییر زبان"><i class="fa-solid fa-globe"></i></button>
     </div>
   </div>
@@ -1013,60 +1340,196 @@
   </div>
   {{ end }}
 
-  <!-- STATS ROW -->
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-chart-line"></i> <span id="usedStatLabel">مصرف شده</span></div><div><span id="usedStatValue" class="stat-number">0</span> <span class="stat-unit" id="usedUnit">گیگابایت</span></div></div>
-    <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-database"></i> <span id="totalStatLabel">حجم کل</span></div><div><span id="totalStatValue" class="stat-number">0</span> <span class="stat-unit">گیگابایت</span></div></div>
-    <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-clock"></i> <span id="remainStatLabel">باقی‌مانده</span></div><div><span id="remainStatValue" class="stat-number">0</span> <span class="stat-unit">گیگابایت</span></div></div>
-    <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-calendar"></i> <span id="expiryStatLabel">انقضا</span></div><div><span id="expiryDatePreview" class="stat-number" style="font-size:1.1rem;">—</span></div><div id="statusChip" class="trend-badge"><i class="fa-solid fa-circle-check"></i> فعال</div></div>
-  </div>
+  <!-- TAB NAVIGATION BAR -->
+  <nav class="tab-navigation-bar" aria-label="منوی صفحات">
+    <button class="tab-btn active" data-tab="tab-dashboard" type="button">
+      <i class="fa-solid fa-gauge-high"></i>
+      <span id="tabNavDashboard">وضعیت</span>
+    </button>
+    <button class="tab-btn" data-tab="tab-configs" type="button">
+      <i class="fa-solid fa-server"></i>
+      <span id="tabNavConfigs">کانفیگ‌ها</span>
+      <span id="tabConfigsBadge" class="tab-badge">0</span>
+    </button>
+    <button class="tab-btn" data-tab="tab-import" type="button">
+      <i class="fa-solid fa-bolt"></i>
+      <span id="tabNavImport">اتصال سریع</span>
+    </button>
+    <button class="tab-btn" data-tab="tab-apps" type="button">
+      <i class="fa-solid fa-download"></i>
+      <span id="tabNavApps">برنامه‌ها</span>
+    </button>
+  </nav>
 
-  <!-- MAIN TWO COLUMN LAYOUT -->
-  <div class="dashboard-two">
-    <!-- LEFT: Usage & Countdown -->
-    <div class="usage-ring">
-      <div class="ring-wrapper">
-        <div class="progress-ring">
-          <svg width="180" height="180" viewBox="0 0 180 180">
-            <circle cx="90" cy="90" r="78" fill="none" stroke="rgba(148,163,184,0.2)" stroke-width="12" />
-            <circle id="progressCircle" cx="90" cy="90" r="78" fill="none" stroke="var(--accent)" stroke-width="12" stroke-dasharray="0 490" transform="rotate(-90 90 90)" stroke-linecap="round" />
-          </svg>
-          <div class="ring-percent"><span id="ringPercentText">0%</span><span id="ringUsageLabel" style="font-size:0.7rem;">مصرف</span></div>
-        </div>
-        <div class="traffic-details">
-          <div class="traffic-item"><i class="fa-solid fa-arrow-down"></i> <span id="downloadVal">۰ گیگابایت</span><br><span style="font-size:0.7rem;" id="downloadLabel">دریافت</span></div>
-          <div class="traffic-item"><i class="fa-solid fa-arrow-up"></i> <span id="uploadVal">۰ گیگابایت</span><br><span style="font-size:0.7rem;" id="uploadLabel">ارسال</span></div>
-        </div>
-      </div>
-      <div class="expiry-box">
-        <div><i class="fa-regular fa-hourglass-half"></i> <span id="expiryTextLabel">زمان باقی‌مانده</span></div>
-        <div class="countdown">
-          <div class="cd-unit"><div class="cd-number" id="daysLeft">0</div><span id="daysLabel">روز</span></div>
-          <div class="cd-unit"><div class="cd-number" id="hoursLeft">0</div><span id="hoursLabel">ساعت</span></div>
-          <div class="cd-unit"><div class="cd-number" id="minutesLeft">0</div><span id="minutesLabel">دقیقه</span></div>
-        </div>
-        <div id="lastOnlineInfo" style="margin-top: 0.7rem; font-size: 0.7rem; color: var(--text-secondary);"></div>
-      </div>
+  <!-- TAB 1: DASHBOARD -->
+  <div id="tab-dashboard" class="tab-page active-tab">
+    <!-- STATS ROW -->
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-chart-line"></i> <span id="usedStatLabel">مصرف شده</span></div><div><span id="usedStatValue" class="stat-number">0</span> <span class="stat-unit" id="usedUnit">گیگابایت</span></div></div>
+      <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-database"></i> <span id="totalStatLabel">حجم کل</span></div><div><span id="totalStatValue" class="stat-number">0</span> <span class="stat-unit">گیگابایت</span></div></div>
+      <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-clock"></i> <span id="remainStatLabel">باقی‌مانده</span></div><div><span id="remainStatValue" class="stat-number">0</span> <span class="stat-unit">گیگابایت</span></div></div>
+      <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-calendar"></i> <span id="expiryStatLabel">انقضا</span></div><div><span id="expiryDatePreview" class="stat-number" style="font-size:1.1rem;">—</span></div><div id="statusChip" class="trend-badge"><i class="fa-solid fa-circle-check"></i> فعال</div></div>
     </div>
 
-    <!-- RIGHT: Configs List -->
-    <div class="configs-section">
-      <div class="section-header">
-        <div><i class="fa-solid fa-key"></i> <strong id="configsTitle">کانفیگ‌های اختصاصی</strong></div>
-        <span id="configCountBadge" style="font-size:0.7rem; background: rgba(59,130,246,0.2); padding:0.2rem 0.7rem; border-radius:2rem;">0</span>
+    <!-- USAGE RING & COUNTDOWN -->
+    <div class="glass-panel" style="padding: 1.5rem; margin-top: var(--space-4);">
+      <div class="dashboard-two" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); align-items: center;">
+        <div class="ring-wrapper" style="justify-content: center;">
+          <div class="progress-ring">
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <circle cx="90" cy="90" r="78" fill="none" stroke="rgba(148,163,184,0.2)" stroke-width="12" />
+              <circle id="progressCircle" cx="90" cy="90" r="78" fill="none" stroke="var(--accent)" stroke-width="12" stroke-dasharray="0 490" transform="rotate(-90 90 90)" stroke-linecap="round" />
+            </svg>
+            <div class="ring-percent"><span id="ringPercentText">0%</span><span id="ringUsageLabel" style="font-size:0.7rem;">مصرف</span></div>
+          </div>
+          <div class="traffic-details">
+            <div class="traffic-item"><i class="fa-solid fa-arrow-down"></i> <span id="downloadVal">۰ گیگابایت</span><br><span style="font-size:0.7rem;" id="downloadLabel">دریافت</span></div>
+            <div class="traffic-item"><i class="fa-solid fa-arrow-up"></i> <span id="uploadVal">۰ گیگابایت</span><br><span style="font-size:0.7rem;" id="uploadLabel">ارسال</span></div>
+          </div>
+        </div>
+        <div class="expiry-box" style="margin: 0; width: 100%;">
+          <div><i class="fa-regular fa-hourglass-half"></i> <span id="expiryTextLabel">زمان باقی‌مانده</span></div>
+          <div class="countdown">
+            <div class="cd-unit"><div class="cd-number" id="daysLeft">0</div><span id="daysLabel">روز</span></div>
+            <div class="cd-unit"><div class="cd-number" id="hoursLeft">0</div><span id="hoursLabel">ساعت</span></div>
+            <div class="cd-unit"><div class="cd-number" id="minutesLeft">0</div><span id="minutesLabel">دقیقه</span></div>
+          </div>
+          <div id="lastOnlineInfo" style="margin-top: 0.7rem; font-size: 0.7rem; color: var(--text-secondary);"></div>
+        </div>
       </div>
-      <div class="config-list scroll-style" id="configListContainer">
+    </div>
+  </div>
+
+  <!-- TAB 2: CONFIGS -->
+  <div id="tab-configs" class="tab-page">
+    <div class="glass-panel" style="padding: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: var(--space-2);">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <i class="fa-solid fa-server" style="color: var(--accent); font-size: 1.2rem;"></i>
+          <strong id="configsTitle" style="font-size: 1.1rem;">کانفیگ‌های اختصاصی</strong>
+          <span id="configCountBadge" style="font-size:0.7rem; background: var(--accent-soft); border: 1.5px solid var(--border); padding:0.2rem 0.7rem; border-radius:2rem; font-weight: 800;">0</span>
+        </div>
+        <button id="copyAllConfigsBtn" class="btn-icon btn-primary" type="button">
+          <i class="fa-regular fa-copy"></i>
+          <span id="lblCopyAll">کپی همه کانفیگ‌ها</span>
+        </button>
+      </div>
+
+      <!-- Search Bar -->
+      <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; background: var(--surface-strong); border: 2.5px solid var(--border); border-radius: var(--radius-md); padding: 0.5rem 0.8rem; box-shadow: 2px 2px 0px var(--border);">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+        <input id="configSearchInput" type="text" placeholder="جستجو در بین کانفیگ‌ها..." style="width: 100%; border: none; background: transparent; color: var(--text-primary); outline: none; font-family: inherit; font-size: 0.9rem;" />
+      </div>
+
+      <div class="config-list scroll-style" id="configListContainer" style="height: auto; max-height: 60vh;">
         <div style="text-align:center; padding:2rem;" id="noConfigMsg">در حال بارگذاری...</div>
       </div>
     </div>
   </div>
 
-  <!-- APPS SECTION -->
-  <div class="glass-panel" style="padding: 1.2rem 1.5rem;">
-    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;"><i class="fa-solid fa-download"></i><strong id="appsTitleApp">برنامه های پیشنهادی</strong></div>
-    <div id="appsGridContainer" class="apps-grid"></div>
+  <!-- TAB 3: QUICK CONNECT (ONE-CLICK IMPORT) -->
+  <div id="tab-import" class="tab-page">
+    <div class="glass-panel" style="padding: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.25rem;">
+        <i class="fa-solid fa-bolt" style="color: var(--accent); font-size: 1.3rem;"></i>
+        <strong id="quickImportHeaderTitle" style="font-size: 1.1rem;">افزودن مستقیم به نرم‌افزارها</strong>
+      </div>
+      <div class="quick-import-grid">
+        <a id="btnImportV2rayNG" class="import-app-card" href="#">
+          <i class="fa-brands fa-android"></i>
+          <div>
+            <div>v2rayNG</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Android</small>
+          </div>
+        </a>
+
+        <a id="btnImportV2Box" class="import-app-card" href="#">
+          <i class="fa-solid fa-cube"></i>
+          <div>
+            <div>V2Box</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS / Android</small>
+          </div>
+        </a>
+
+        <a id="btnImportShadowrocket" class="import-app-card" href="#">
+          <i class="fa-solid fa-rocket"></i>
+          <div>
+            <div>Shadowrocket</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS</small>
+          </div>
+        </a>
+
+        <a id="btnImportStreisand" class="import-app-card" href="#">
+          <i class="fa-brands fa-apple"></i>
+          <div>
+            <div>Streisand</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS</small>
+          </div>
+        </a>
+
+        <a id="btnImportHapp" class="import-app-card" href="#">
+          <i class="fa-solid fa-feather-pointed"></i>
+          <div>
+            <div>Happ</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS / Android</small>
+          </div>
+        </a>
+
+        <a id="btnImportHiddify" class="import-app-card" href="#">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div>
+            <div>Hiddify</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
+          </div>
+        </a>
+
+        <a id="btnImportSingBox" class="import-app-card" href="#">
+          <i class="fa-solid fa-box-archive"></i>
+          <div>
+            <div>Sing-box</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
+          </div>
+        </a>
+
+        <a id="btnImportIncy" class="import-app-card" href="#">
+          <i class="fa-solid fa-compass"></i>
+          <div>
+            <div>Incy</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
+          </div>
+        </a>
+
+        <a id="btnImportV2RayTun" class="import-app-card" href="#">
+          <i class="fa-solid fa-paper-plane"></i>
+          <div>
+            <div>V2RayTun</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">iOS / Android</small>
+          </div>
+        </a>
+
+        <a id="btnImportClash" class="import-app-card" href="#">
+          <i class="fa-solid fa-cat"></i>
+          <div>
+            <div>Clash / Mihomo</div>
+            <small style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">Multi-platform</small>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top: 1.5rem; display: flex; gap: var(--space-3); flex-wrap: wrap;">
+        <button id="copyClashBtn" class="btn-icon" type="button" style="flex: 1; min-width: 180px;"><i class="fa-solid fa-cat"></i> <span id="txtCopyClash">کپی لینک Clash / Mihomo</span></button>
+        <button id="copyJsonBtn" class="btn-icon" type="button" style="flex: 1; min-width: 180px;"><i class="fa-solid fa-file-code"></i> <span id="txtCopyJson">کپی لینک JSON / Sing-box</span></button>
+      </div>
+    </div>
   </div>
 
+  <!-- TAB 4: APPS -->
+  <div id="tab-apps" class="tab-page">
+    <div class="glass-panel" style="padding: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;"><i class="fa-solid fa-download"></i><strong id="appsTitleApp">برنامه‌های پیشنهادی</strong></div>
+      <div id="appsGridContainer" class="apps-grid"></div>
+    </div>
+  </div>
   <!-- FOOTER -->
   <footer class="glass-panel" style="margin-top: var(--space-4); padding: var(--space-3) var(--space-4); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-2); font-size: 0.8rem; color: var(--text-secondary); border-radius: var(--radius-lg);">
     <div>
@@ -1189,8 +1652,8 @@
 
   // i18n
   const locales = {
-    fa: { used: "مصرف شده", usage: "مصرف", total: "کل حجم", remain: "باقی‌مانده", expiry: "انقضا", days: "روز", hours: "ساعت", minutes: "دقیقه", copy: "کپی لینک", qr: "QR", active: "فعال", inactive: "غیرفعال", unlimited: "نامحدود", copyDone: "کپی شد!", copyFail: "خطا", download: "دریافت", upload: "ارسال", configTitle: "کانفیگ‌ها", appsTitle: "دانلود اپلیکیشن", noConfig: "کانفیگی موجود نیست", lastOnline: "آخرین آنلاین", timeExpired: "منقضی شده", timeUnlimited: "نامحدود", remainTime: "زمان باقیمانده", expireDateFormat: "روز / ساعت / دقیقه", subscriptionHub: "پنل اشتراک", volumeUnit: "گیگابایت" },
-    en: { used: "Used", usage: "Usage", total: "Total", remain: "Remaining", expiry: "Expiry", days: "Days", hours: "Hours", minutes: "Mins", copy: "Copy Link", qr: "QR", active: "Active", inactive: "Inactive", unlimited: "Unlimited", copyDone: "Copied!", copyFail: "Failed", download: "Download", upload: "Upload", configTitle: "Configs", appsTitle: "Client Apps", noConfig: "No configs available", lastOnline: "Last online", timeExpired: "Expired", timeUnlimited: "No limit", remainTime: "Remaining time", expireDateFormat: "day / hour / min", subscriptionHub: "Subscription Hub", volumeUnit: "GB" }
+    fa: { used: "مصرف شده", usage: "مصرف", total: "کل حجم", remain: "باقی‌مانده", expiry: "انقضا", days: "روز", hours: "ساعت", minutes: "دقیقه", copy: "کپی لینک", qr: "QR", active: "فعال", inactive: "غیرفعال", unlimited: "نامحدود", copyDone: "کپی شد!", copyFail: "خطا", download: "دریافت", upload: "ارسال", configTitle: "کانفیگ‌ها", appsTitle: "دانلود اپلیکیشن", noConfig: "کانفیگی موجود نیست", lastOnline: "آخرین آنلاین", timeExpired: "منقضی شده", timeUnlimited: "نامحدود", remainTime: "زمان باقیمانده", expireDateFormat: "روز / ساعت / دقیقه", subscriptionHub: "پنل اشتراک", volumeUnit: "گیگابایت", tabDashboard: "وضعیت", tabConfigs: "کانفیگ‌ها", tabImport: "اتصال سریع", tabApps: "برنامه‌ها", copyAll: "کپی همه کانفیگ‌ها", quickImport: "افزودن مستقیم به نرم‌افزارها", searchConfigs: "جستجو در بین کانفیگ‌ها..." },
+    en: { used: "Used", usage: "Usage", total: "Total", remain: "Remaining", expiry: "Expiry", days: "Days", hours: "Hours", minutes: "Mins", copy: "Copy Link", qr: "QR", active: "Active", inactive: "Inactive", unlimited: "Unlimited", copyDone: "Copied!", copyFail: "Failed", download: "Download", upload: "Upload", configTitle: "Configs", appsTitle: "Client Apps", noConfig: "No configs available", lastOnline: "Last online", timeExpired: "Expired", timeUnlimited: "No limit", remainTime: "Remaining time", expireDateFormat: "day / hour / min", subscriptionHub: "Subscription Hub", volumeUnit: "GB", tabDashboard: "Dashboard", tabConfigs: "Configs", tabImport: "Quick Import", tabApps: "Apps", copyAll: "Copy All Configs", quickImport: "One-Click Client Import", searchConfigs: "Search configs..." }
   };
   let currentLang = localStorage.getItem("nexus_lang") || "fa";
   // ======================== UI & THEME ========================
@@ -1570,7 +2033,10 @@
     document.documentElement.dir = currentLang === "fa" ? "rtl" : "ltr";
     localStorage.setItem("nexus_theme", isDark ? "dark" : "light");
     localStorage.setItem("nexus_lang", currentLang);
-    document.getElementById("themeIcon").className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    const ts = document.getElementById("themeSwitch");
+    if (ts) ts.checked = isDark;
+    const badgeEl = document.getElementById("tabConfigsBadge");
+    if (badgeEl) badgeEl.innerText = formatDisplay(configsList.length);
     updateDocumentTitle();
     document.getElementById("panelTitle").innerText = getPanelTitle();
     document.getElementById("usedStatLabel").innerText = t("used");
@@ -1584,6 +2050,13 @@
     document.getElementById("ringUsageLabel").innerText = t("usage");
     document.getElementById("configsTitle").innerText = t("configTitle");
     document.getElementById("appsTitleApp").innerText = t("appsTitle");
+    document.getElementById("tabNavDashboard").innerText = t("tabDashboard");
+    document.getElementById("tabNavConfigs").innerText = t("tabConfigs");
+    document.getElementById("tabNavImport").innerText = t("tabImport");
+    document.getElementById("tabNavApps").innerText = t("tabApps");
+    if (document.getElementById("lblCopyAll")) document.getElementById("lblCopyAll").innerText = t("copyAll");
+    if (document.getElementById("quickImportHeaderTitle")) document.getElementById("quickImportHeaderTitle").innerText = t("quickImport");
+    if (document.getElementById("configSearchInput")) document.getElementById("configSearchInput").placeholder = t("searchConfigs");
     document.getElementById("copyMainBtn").setAttribute("aria-label", t("copy"));
     document.getElementById("copyMainBtn").setAttribute("title", t("copy"));
     document.getElementById("qrMainBtn").setAttribute("aria-label", t("qr"));
@@ -1637,12 +2110,135 @@
   // event listeners
   document.getElementById("copyMainBtn").addEventListener("click", () => copyText(subLink, t("copyDone")));
   document.getElementById("qrMainBtn").addEventListener("click", () => { if(subLink) showQR(subLink, t("qr") + " " + t("configTitle"), subLink); else showToast(t("copyFail")); });
-  document.getElementById("themeToggleBtn").addEventListener("click", () => { isDark = !isDark; updateUI(); });
+// themeSwitch handles toggle
   document.getElementById("langToggleBtn").addEventListener("click", () => { currentLang = currentLang === "fa" ? "en" : "fa"; updateUI(); });
   document.getElementById("closeModalBtn").addEventListener("click", closeModal);
   document.getElementById("qrModal").addEventListener("click", (e) => { if(e.target === document.getElementById("qrModal")) closeModal(); });
   document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
 
+
+  // ======================== TABS SWITCHING LOGIC ========================
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabPages = document.querySelectorAll(".tab-page");
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-tab");
+      tabButtons.forEach(b => b.classList.remove("active"));
+      tabPages.forEach(p => p.classList.remove("active-tab"));
+
+      btn.classList.add("active");
+      const targetPage = document.getElementById(targetId);
+      if (targetPage) {
+        targetPage.classList.add("active-tab");
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  // ======================== QUICK APP BUTTONS ========================
+  function setupQuickAppButtons() {
+    const encSub = encodeURIComponent(subLink);
+    const titleClean = normalize(templateVars.subTitle, templateVars.sId || "3x-Hub");
+    const titleEnc = encodeURIComponent(titleClean);
+    const rocketSource = `${subLink}${subLink.includes('?') ? '&' : '?'}flag=shadowrocket`;
+    const clashTarget = normalize(templateVars.subClashUrl, subLink);
+
+    const elV2rayNG = document.getElementById("btnImportV2rayNG");
+    if (elV2rayNG) elV2rayNG.href = `v2rayng://install-config?url=${encSub}`;
+
+    const elV2Box = document.getElementById("btnImportV2Box");
+    if (elV2Box) elV2Box.href = `v2box://install-sub?url=${encSub}&name=${titleEnc}`;
+
+    const elRocket = document.getElementById("btnImportShadowrocket");
+    if (elRocket) elRocket.href = `shadowrocket://add/sub://${btoa(rocketSource)}?remark=${titleEnc}`;
+
+    const elStreisand = document.getElementById("btnImportStreisand");
+    if (elStreisand) elStreisand.href = `streisand://import/${encSub}`;
+
+    const elHapp = document.getElementById("btnImportHapp");
+    if (elHapp) elHapp.href = `happ://add/${subLink}`;
+
+    const elHiddify = document.getElementById("btnImportHiddify");
+    if (elHiddify) elHiddify.href = `hiddify://install-config?url=${encSub}#${titleEnc}`;
+
+    const elSingBox = document.getElementById("btnImportSingBox");
+    if (elSingBox) elSingBox.href = `sing-box://import-remote-profile?url=${encSub}#${titleEnc}`;
+
+    const elIncy = document.getElementById("btnImportIncy");
+    if (elIncy) elIncy.href = `incy://add/${subLink}`;
+
+    const elV2RayTun = document.getElementById("btnImportV2RayTun");
+    if (elV2RayTun) elV2RayTun.href = `v2raytun://import/${subLink}`;
+
+    const elClash = document.getElementById("btnImportClash");
+    if (elClash) elClash.href = `clash://install-config?url=${encodeURIComponent(clashTarget)}&name=${titleEnc}`;
+  }
+
+  // Copy All Configs
+  document.getElementById("copyAllConfigsBtn")?.addEventListener("click", () => {
+    if (!configsList.length) { showToast(t("copyFail")); return; }
+    copyText(configsList.join("\n"), t("copyDone"));
+  });
+
+  // Copy Clash / JSON
+  document.getElementById("copyClashBtn")?.addEventListener("click", () => {
+    const clashTarget = normalize(templateVars.subClashUrl, subLink);
+    copyText(clashTarget, t("copyDone"));
+  });
+
+  document.getElementById("copyJsonBtn")?.addEventListener("click", () => {
+    const jsonTarget = normalize(templateVars.subJsonUrl, subLink);
+    copyText(jsonTarget, t("copyDone"));
+  });
+
+  // Config Search Input
+  document.getElementById("configSearchInput")?.addEventListener("input", (e) => {
+    filterConfigs(e.target.value);
+  });
+
+  function filterConfigs(query = "") {
+    let container = document.getElementById("configListContainer");
+    if (!configsList.length) return;
+    const q = query.trim().toLowerCase();
+    const filtered = configsList.filter((cfg, idx) => {
+      if (!q) return true;
+      let name = cfg.includes("#") ? decodeURIComponent(cfg.split("#").pop().replace(/\+/g, " ")) : `Config ${idx+1}`;
+      return name.toLowerCase().includes(q) || cfg.toLowerCase().includes(q);
+    });
+
+    if (!filtered.length) {
+      container.innerHTML = `<div style="text-align:center;padding:2rem;">${t("noConfig")}</div>`;
+      return;
+    }
+
+    container.innerHTML = "";
+    filtered.forEach((cfg, idx) => {
+      let name = cfg.includes("#") ? decodeURIComponent(cfg.split("#").pop().replace(/\+/g, " ")) : `${t("configTitle")} ${formatDisplay(idx+1)}`;
+      let proto = detectProto(cfg);
+      let div = document.createElement("div"); div.className = "config-item";
+      div.innerHTML = `<div class="config-meta"><span class="config-name"><span class="proto-tag ${proto}">${proto}</span>${escapeHtml(name)}</span><div class="config-actions"><button class="mini-action copyConfigBtn" data-raw=''><i class="fa-regular fa-copy"></i></button><button class="mini-action qrConfigBtn" data-raw='' data-name="${escapeHtml(name)}"><i class="fa-solid fa-qrcode"></i></button></div></div><div class="config-link">${escapeHtml(cfg.length > 80 ? cfg.substring(0, 80)+"..." : cfg)}</div>`;
+      let copyBtn = div.querySelector(".copyConfigBtn");
+      let qrBtn = div.querySelector(".qrConfigBtn");
+      copyBtn.dataset.raw = cfg;
+      qrBtn.dataset.raw = cfg;
+      copyBtn.addEventListener("click", (e) => { let link = e.currentTarget.dataset.raw; copyText(link, t("copyDone")); });
+      qrBtn.addEventListener("click", (e) => { let link = e.currentTarget.dataset.raw; let n = e.currentTarget.dataset.name; showQR(link, `${n} (${t("configTitle")})`, link); });
+      container.appendChild(div);
+    });
+  }
+
+  // Theme switch checkbox event
+  const themeSwitchEl = document.getElementById("themeSwitch");
+  if (themeSwitchEl) {
+    themeSwitchEl.checked = isDark;
+    themeSwitchEl.addEventListener("change", (e) => {
+      isDark = e.target.checked;
+      updateUI();
+    });
+  }
+
+  setupQuickAppButtons();
   updateUI();
 </script>
 </body>
