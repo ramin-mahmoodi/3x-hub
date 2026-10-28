@@ -1020,6 +1020,7 @@
       box-shadow: 2.5px 2.5px 0px var(--border);
       transition: background-color 0.4s ease, transform 150ms ease, box-shadow 150ms ease;
       overflow: hidden;
+      pointer-events: none;
     }
 
     .switch:hover .slider {
@@ -1545,7 +1546,7 @@
       <button id="copyMainBtn" class="btn-icon btn-primary icon-only-action" type="button" aria-label="کپی لینک اشتراک" title="کپی لینک اشتراک"><i class="fa-regular fa-copy"></i></button>
       <button id="qrMainBtn" class="btn-icon icon-only-action" type="button" aria-label="نمایش QR اشتراک" title="نمایش QR اشتراک"><i class="fa-solid fa-qrcode"></i></button>
       <div class="theme-switch-wrapper">
-        <label class="switch" title="تغییر حالت روشن و تاریک">
+        <label class="switch" id="themeSwitchLabel" title="تغییر حالت روشن و تاریک">
           <input id="themeSwitch" type="checkbox" />
           <div class="slider round">
             <div class="sun-moon">
@@ -1608,8 +1609,8 @@
     <!-- STATS ROW -->
     <div class="stats-grid">
       <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-chart-line"></i> <span id="usedStatLabel">مصرف شده</span></div><div><span id="usedStatValue" class="stat-number">0</span> <span class="stat-unit" id="usedUnit">گیگابایت</span></div></div>
-      <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-database"></i> <span id="totalStatLabel">حجم کل</span></div><div><span id="totalStatValue" class="stat-number">0</span> <span class="stat-unit">گیگابایت</span></div></div>
-      <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-clock"></i> <span id="remainStatLabel">باقی‌مانده</span></div><div><span id="remainStatValue" class="stat-number">0</span> <span class="stat-unit">گیگابایت</span></div></div>
+      <div class="stat-card"><div class="stat-title"><i class="fa-solid fa-database"></i> <span id="totalStatLabel">حجم کل</span></div><div><span id="totalStatValue" class="stat-number">0</span> <span class="stat-unit" id="totalUnit">گیگابایت</span></div></div>
+      <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-clock"></i> <span id="remainStatLabel">باقی‌مانده</span></div><div><span id="remainStatValue" class="stat-number">0</span> <span class="stat-unit" id="remainUnit">گیگابایت</span></div></div>
       <div class="stat-card"><div class="stat-title"><i class="fa-regular fa-calendar"></i> <span id="expiryStatLabel">انقضا</span></div><div><span id="expiryDatePreview" class="stat-number" style="font-size:1.1rem;">—</span></div><div id="statusChip" class="trend-badge"><i class="fa-solid fa-circle-check"></i> فعال</div></div>
     </div>
 
@@ -1910,8 +1911,116 @@
 
   // i18n
   const locales = {
-    fa: { used: "مصرف شده", usage: "مصرف", total: "کل حجم", remain: "باقی‌مانده", expiry: "انقضا", days: "روز", hours: "ساعت", minutes: "دقیقه", copy: "کپی لینک", qr: "QR", active: "فعال", inactive: "غیرفعال", unlimited: "نامحدود", copyDone: "کپی شد!", copyFail: "خطا", download: "دریافت", upload: "ارسال", configTitle: "کانفیگ‌ها", appsTitle: "دانلود اپلیکیشن", noConfig: "کانفیگی موجود نیست", lastOnline: "آخرین آنلاین", timeExpired: "منقضی شده", timeUnlimited: "نامحدود", remainTime: "زمان باقیمانده", expireDateFormat: "روز / ساعت / دقیقه", subscriptionHub: "پنل اشتراک", volumeUnit: "گیگابایت", tabDashboard: "وضعیت", tabConfigs: "کانفیگ‌ها", tabImport: "اتصال سریع", tabApps: "برنامه‌ها", copyAll: "کپی همه کانفیگ‌ها", quickImport: "اتصال سریع", searchConfigs: "جستجو در بین کانفیگ‌ها...", subGeneral: "اشتراک معمولی (Base64)", subJson: "اشتراک Sing-box (JSON)", subClash: "اشتراک Clash / Mihomo", openInApp: "افزودن به برنامه", downloadApp: "دانلود نرم‌افزار", scanTitle: "اسکن با گوشی", scanHint: "این کد را در اپلیکیشن VPN اسکن کنید تا اشتراک بدون کپی‌کردن لینک اضافه شود.", saveQr: "ذخیره تصویر QR", qrTitle: "اسکن QR اشتراک" },
-    en: { used: "Used", usage: "Usage", total: "Total", remain: "Remaining", expiry: "Expiry", days: "Days", hours: "Hours", minutes: "Mins", copy: "Copy Link", qr: "QR", active: "Active", inactive: "Inactive", unlimited: "Unlimited", copyDone: "Copied!", copyFail: "Failed", download: "Download", upload: "Upload", configTitle: "Configs", appsTitle: "Client Apps", noConfig: "No configs available", lastOnline: "Last online", timeExpired: "Expired", timeUnlimited: "No limit", remainTime: "Remaining time", expireDateFormat: "day / hour / min", subscriptionHub: "Subscription Hub", volumeUnit: "GB", tabDashboard: "Dashboard", tabConfigs: "Configs", tabImport: "Quick Import", tabApps: "Apps", copyAll: "Copy All Configs", quickImport: "Quick Connect", searchConfigs: "Search configs...", subGeneral: "Subscription (Base64)", subJson: "Sing-box JSON", subClash: "Clash / Mihomo", openInApp: "Add to App", downloadApp: "Download App", scanTitle: "Scan with Phone", scanHint: "Scan this QR in your VPN app to import subscription directly without copying.", saveQr: "Save QR Image", qrTitle: "Subscription QR Code" }
+    fa: {
+      used: "مصرف شده",
+      usage: "مصرف",
+      total: "حجم کل",
+      remain: "باقی‌مانده",
+      expiry: "انقضا",
+      days: "روز",
+      hours: "ساعت",
+      minutes: "دقیقه",
+      copy: "کپی لینک",
+      copySubLink: "کپی لینک اشتراک",
+      downloadRaw: "دانلود فایل خام",
+      qr: "QR",
+      active: "فعال",
+      inactive: "غیرفعال",
+      unlimited: "نامحدود",
+      copyDone: "کپی شد!",
+      copyFail: "خطا در کپی",
+      download: "دریافت",
+      upload: "ارسال",
+      configTitle: "کانفیگ‌ها",
+      appsTitle: "اپلیکیشن‌های پیشنهادی و اتصال خودکار",
+      noConfig: "کانفیگی موجود نیست",
+      lastOnline: "آخرین آنلاین",
+      timeExpired: "منقضی شده",
+      timeUnlimited: "نامحدود",
+      remainTime: "زمان باقی‌مانده",
+      expireDateFormat: "روز / ساعت / دقیقه",
+      subscriptionHub: "پنل اشتراک",
+      volumeUnit: "گیگابایت",
+      tabDashboard: "وضعیت",
+      tabConfigs: "کانفیگ‌ها",
+      tabImport: "اتصال سریع",
+      tabApps: "برنامه‌ها",
+      copyAll: "کپی همه کانفیگ‌ها",
+      quickImport: "اتصال سریع",
+      quickLinksTitle: "لینک‌های اختصاصی اشتراک",
+      searchConfigs: "جستجو در بین کانفیگ‌ها...",
+      subGeneral: "اشتراک معمولی (Base64)",
+      subJson: "اشتراک Sing-box (JSON)",
+      subClash: "اشتراک Clash / Mihomo",
+      openInApp: "افزودن به برنامه",
+      downloadApp: "دانلود نرم‌افزار",
+      scanTitle: "اسکن با گوشی",
+      scanHint: "این کد را در اپلیکیشن VPN اسکن کنید تا اشتراک بدون کپی‌کردن لینک اضافه شود.",
+      saveQr: "ذخیره تصویر QR",
+      qrTitle: "QR کد اشتراک",
+      support: "پشتیبانی و راهنما",
+      themeToggle: "تغییر حالت روشن و تاریک",
+      langToggle: "English",
+      close: "بستن",
+      loading: "در حال بارگذاری...",
+      online: "آنلاین",
+      offline: "آفلاین"
+    },
+    en: {
+      used: "Used",
+      usage: "Usage",
+      total: "Total",
+      remain: "Remaining",
+      expiry: "Expiry",
+      days: "Days",
+      hours: "Hours",
+      minutes: "Mins",
+      copy: "Copy Link",
+      copySubLink: "Copy Subscription Link",
+      downloadRaw: "Download Raw Config",
+      qr: "QR",
+      active: "Active",
+      inactive: "Inactive",
+      unlimited: "Unlimited",
+      copyDone: "Copied!",
+      copyFail: "Copy Failed",
+      download: "Download",
+      upload: "Upload",
+      configTitle: "Configs",
+      appsTitle: "Recommended Apps & Quick Connect",
+      noConfig: "No configs available",
+      lastOnline: "Last Online",
+      timeExpired: "Expired",
+      timeUnlimited: "No Limit",
+      remainTime: "Remaining Time",
+      expireDateFormat: "day / hour / min",
+      subscriptionHub: "Subscription Hub",
+      volumeUnit: "GB",
+      tabDashboard: "Dashboard",
+      tabConfigs: "Configs",
+      tabImport: "Quick Connect",
+      tabApps: "Apps",
+      copyAll: "Copy All Configs",
+      quickImport: "Quick Connect",
+      quickLinksTitle: "Dedicated Subscription Links",
+      searchConfigs: "Search configs...",
+      subGeneral: "Subscription (Base64)",
+      subJson: "Sing-box (JSON)",
+      subClash: "Clash / Mihomo",
+      openInApp: "Add to App",
+      downloadApp: "Download App",
+      scanTitle: "Scan with Phone",
+      scanHint: "Scan this QR code in your VPN app to import subscription directly without copying.",
+      saveQr: "Save QR Image",
+      qrTitle: "Subscription QR Code",
+      support: "Support & Help",
+      themeToggle: "Toggle Dark / Light Theme",
+      langToggle: "فارسی",
+      close: "Close",
+      loading: "Loading...",
+      online: "Online",
+      offline: "Offline"
+    }
   };
   let currentLang = localStorage.getItem("nexus_lang") || "fa";
   // ======================== UI & THEME ========================
@@ -1925,6 +2034,11 @@
   // ---------- display helpers: Persian digits + safe timestamp/date formatting ----------
   function toFaDigits(value) {
     return String(value ?? "").replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+  }
+
+  function toEnDigits(value) {
+    const faDigits = "۰۱۲۳۴۵۶۷۸۹";
+    return String(value ?? "").replace(/[۰-۹]/g, d => faDigits.indexOf(d));
   }
 
   function formatDisplay(value) {
@@ -2236,7 +2350,7 @@
       let name = cfg.includes("#") ? decodeURIComponent(cfg.split("#").pop().replace(/\+/g, " ")) : `${t("configTitle")} ${formatDisplay(idx+1)}`;
       let proto = detectProto(cfg);
       let div = document.createElement("div"); div.className = "config-item";
-      div.innerHTML = `<div class="config-meta"><span class="config-name"><span class="proto-tag ${proto}">${proto}</span>${escapeHtml(name)}</span><div class="config-actions"><button class="mini-action copyConfigBtn" data-raw=''><i class="fa-regular fa-copy"></i></button><button class="mini-action qrConfigBtn" data-raw='' data-name="${escapeHtml(name)}"><i class="fa-solid fa-qrcode"></i></button></div></div><div class="config-link">${escapeHtml(cfg.length > 80 ? cfg.substring(0, 80)+"..." : cfg)}</div>`;
+      div.innerHTML = `<div class="config-meta"><span class="config-name"><span class="proto-tag ${proto}">${proto}</span>${escapeHtml(name)}</span><div class="config-actions"><button class="mini-action copyConfigBtn" data-raw='' title="${t('copy')}"><i class="fa-regular fa-copy"></i></button><button class="mini-action qrConfigBtn" data-raw='' data-name="${escapeHtml(name)}" title="${t('qr')}"><i class="fa-solid fa-qrcode"></i></button></div></div><div class="config-link">${escapeHtml(cfg.length > 80 ? cfg.substring(0, 80)+"..." : cfg)}</div>`;
       let copyBtn = div.querySelector(".copyConfigBtn");
       let qrBtn = div.querySelector(".qrConfigBtn");
       copyBtn.dataset.raw = cfg;
@@ -2249,20 +2363,24 @@
 
   function escapeHtml(str) { return String(str).replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-  function forcePersianDigitsInTextNodes(root = document.body) {
-    if (!isPersianUI() || !root) return;
+  function normalizeDigitsInTextNodes(root = document.body) {
+    if (!root) return;
     const skipTags = new Set(["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "CODE", "PRE"]);
+    const isFa = currentLang === "fa";
+    const regex = isFa ? /\d/ : /[۰-۹]/;
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
         const parent = node.parentElement;
         if (!parent || skipTags.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
-        if (parent.closest && parent.closest(".config-link, #qrModalText")) return NodeFilter.FILTER_REJECT;
-        return /\d/.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+        if (parent.closest && parent.closest(".config-link, #qrModalText, #valSubStandard, #valSubJson, #valSubClash")) return NodeFilter.FILTER_REJECT;
+        return regex.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
       }
     });
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach(node => { node.nodeValue = toFaDigits(node.nodeValue); });
+    nodes.forEach(node => {
+      node.nodeValue = isFa ? toFaDigits(node.nodeValue) : toEnDigits(node.nodeValue);
+    });
   }
 
   // Observer and intervals for Persian digits are removed to improve performance.
@@ -2277,6 +2395,7 @@
   }
 
   function updateUI() {
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
     document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === "fa" ? "rtl" : "ltr";
     localStorage.setItem("nexus_theme", isDark ? "dark" : "light");
@@ -2288,8 +2407,10 @@
     if (badgeEl) badgeEl.innerText = formatDisplay(configsList.length);
 
     // Header & Stats translations
-    const elSubHub = document.getElementById("subscriptionHubTitle");
-    if (elSubHub) elSubHub.innerText = t("subscriptionHub");
+    const elPanelTitle = document.getElementById("panelTitle");
+    if (elPanelTitle) elPanelTitle.innerText = getPanelTitle();
+    updateDocumentTitle();
+
     const elUsedStat = document.getElementById("usedStatLabel");
     if (elUsedStat) elUsedStat.innerText = t("used");
     const elTotalStat = document.getElementById("totalStatLabel");
@@ -2302,6 +2423,10 @@
     if (elRingUsage) elRingUsage.innerText = t("usage");
     const elUsedUnit = document.getElementById("usedUnit");
     if (elUsedUnit) elUsedUnit.innerText = t("volumeUnit");
+    const elTotalUnit = document.getElementById("totalUnit");
+    if (elTotalUnit) elTotalUnit.innerText = t("volumeUnit");
+    const elRemainUnit = document.getElementById("remainUnit");
+    if (elRemainUnit) elRemainUnit.innerText = t("volumeUnit");
     const elDownLabel = document.getElementById("downloadLabel");
     if (elDownLabel) elDownLabel.innerText = t("download");
     const elUpLabel = document.getElementById("uploadLabel");
@@ -2327,39 +2452,55 @@
     const elTabConfigs = document.getElementById("tabNavConfigs");
     if (elTabConfigs) elTabConfigs.innerText = t("tabConfigs");
 
-    // Other section labels
+    // Section labels & tooltips
     if (document.getElementById("lblCopyAll")) document.getElementById("lblCopyAll").innerText = t("copyAll");
-    if (document.getElementById("quickLinksTitle")) document.getElementById("quickLinksTitle").innerText = t("quickImport");
+    if (document.getElementById("quickLinksTitle")) document.getElementById("quickLinksTitle").innerText = t("quickLinksTitle");
     if (document.getElementById("appsHeaderTitle")) document.getElementById("appsHeaderTitle").innerText = t("appsTitle");
     if (document.getElementById("inpageScanTitle")) document.getElementById("inpageScanTitle").innerText = t("scanTitle");
     if (document.getElementById("inpageScanHint")) document.getElementById("inpageScanHint").innerText = t("scanHint");
     if (document.getElementById("lblSaveInpageQr")) document.getElementById("lblSaveInpageQr").innerText = t("saveQr");
-    if (document.getElementById("lblCopyInpageSub")) document.getElementById("lblCopyInpageSub").innerText = t("copy");
+    if (document.getElementById("lblCopyInpageSub")) document.getElementById("lblCopyInpageSub").innerText = t("copySubLink");
+    if (document.getElementById("modalQrTitle")) document.getElementById("modalQrTitle").innerText = t("qrTitle");
     if (document.getElementById("modalCopyLabel")) document.getElementById("modalCopyLabel").innerText = t("copy");
     if (document.getElementById("modalSaveQrLabel")) document.getElementById("modalSaveQrLabel").innerText = t("saveQr");
     if (document.getElementById("lblSubStandard")) document.getElementById("lblSubStandard").innerText = t("subGeneral");
     if (document.getElementById("lblSubJson")) document.getElementById("lblSubJson").innerText = t("subJson");
     if (document.getElementById("lblSubClash")) document.getElementById("lblSubClash").innerText = t("subClash");
     if (document.getElementById("configSearchInput")) document.getElementById("configSearchInput").placeholder = t("searchConfigs");
+    if (document.getElementById("noConfigMsg")) document.getElementById("noConfigMsg").innerText = t("noConfig");
+
+    // SubLink Action tooltips
+    if (document.getElementById("btnCopySubStandard")) document.getElementById("btnCopySubStandard").title = t("copy");
+    if (document.getElementById("btnQrSubStandard")) document.getElementById("btnQrSubStandard").title = t("qr");
+    if (document.getElementById("btnDownloadSubJson")) document.getElementById("btnDownloadSubJson").title = t("downloadRaw");
+    if (document.getElementById("btnCopySubJson")) document.getElementById("btnCopySubJson").title = t("copy");
+    if (document.getElementById("btnQrSubJson")) document.getElementById("btnQrSubJson").title = t("qr");
+    if (document.getElementById("btnDownloadSubClash")) document.getElementById("btnDownloadSubClash").title = t("downloadRaw");
+    if (document.getElementById("btnCopySubClash")) document.getElementById("btnCopySubClash").title = t("copy");
+    if (document.getElementById("btnQrSubClash")) document.getElementById("btnQrSubClash").title = t("qr");
 
     const copyMainBtn = document.getElementById("copyMainBtn");
     if (copyMainBtn) {
-      copyMainBtn.setAttribute("aria-label", t("copy"));
-      copyMainBtn.setAttribute("title", t("copy"));
+      copyMainBtn.setAttribute("aria-label", t("copySubLink"));
+      copyMainBtn.setAttribute("title", t("copySubLink"));
     }
     const qrMainBtn = document.getElementById("qrMainBtn");
     if (qrMainBtn) {
-      qrMainBtn.setAttribute("aria-label", t("qr"));
-      qrMainBtn.setAttribute("title", t("qr"));
+      qrMainBtn.setAttribute("aria-label", t("qrTitle"));
+      qrMainBtn.setAttribute("title", t("qrTitle"));
+    }
+    const themeSwitchLabel = document.getElementById("themeSwitchLabel");
+    if (themeSwitchLabel) {
+      themeSwitchLabel.setAttribute("title", t("themeToggle"));
     }
     const langToggleBtn = document.getElementById("langToggleBtn");
     if (langToggleBtn) {
-      langToggleBtn.setAttribute("aria-label", currentLang === "fa" ? "تغییر زبان" : "Change language");
-      langToggleBtn.setAttribute("title", currentLang === "fa" ? "English" : "فارسی");
+      langToggleBtn.setAttribute("aria-label", t("langToggle"));
+      langToggleBtn.setAttribute("title", t("langToggle"));
     }
     const closeModalBtn = document.getElementById("closeModalBtn");
     if (closeModalBtn) {
-      closeModalBtn.setAttribute("aria-label", currentLang === "fa" ? "بستن" : "Close");
+      closeModalBtn.setAttribute("aria-label", t("close"));
     }
 
     if (emailsList.length) {
@@ -2374,15 +2515,23 @@
     let dot = document.getElementById("liveOnlineDot");
     if (dot) {
       dot.className = `live-dot ${isOnline ? '' : 'is-offline'}`;
-      dot.title = isOnline ? (currentLang === "fa" ? "آنلاین" : "Online") : (currentLang === "fa" ? "آفلاین" : "Offline");
+      dot.title = isOnline ? t("online") : t("offline");
     }
+
+    const lblUpd = document.getElementById("lblUpdateInterval");
+    if (lblUpd && templateVars.subUpdates) {
+      const hours = formatDisplay(templateVars.subUpdates);
+      lblUpd.innerText = currentLang === "fa" ? `بروزرسانی خودکار: هر ${hours} ساعت` : `Auto-update: every ${hours} hours`;
+    }
+    const supLink = document.getElementById("supportLinkText");
+    if (supLink) supLink.innerText = t("support");
 
     renderStatsAndRing();
     renderExpiryCountdown();
     renderConfigs();
     renderSubLinks();
     renderPlatformApps(activePlatform);
-    forcePersianDigitsInTextNodes();
+    normalizeDigitsInTextNodes();
   }
 
   async function pollLiveInfo() {
@@ -2816,7 +2965,7 @@
       let name = cfg.includes("#") ? decodeURIComponent(cfg.split("#").pop().replace(/\+/g, " ")) : `${t("configTitle")} ${formatDisplay(idx+1)}`;
       let proto = detectProto(cfg);
       let div = document.createElement("div"); div.className = "config-item";
-      div.innerHTML = `<div class="config-meta"><span class="config-name"><span class="proto-tag ${proto}">${proto}</span>${escapeHtml(name)}</span><div class="config-actions"><button class="mini-action copyConfigBtn" data-raw=''><i class="fa-regular fa-copy"></i></button><button class="mini-action qrConfigBtn" data-raw='' data-name="${escapeHtml(name)}"><i class="fa-solid fa-qrcode"></i></button></div></div><div class="config-link">${escapeHtml(cfg.length > 80 ? cfg.substring(0, 80)+"..." : cfg)}</div>`;
+      div.innerHTML = `<div class="config-meta"><span class="config-name"><span class="proto-tag ${proto}">${proto}</span>${escapeHtml(name)}</span><div class="config-actions"><button class="mini-action copyConfigBtn" data-raw='' title="${t('copy')}"><i class="fa-regular fa-copy"></i></button><button class="mini-action qrConfigBtn" data-raw='' data-name="${escapeHtml(name)}" title="${t('qr')}"><i class="fa-solid fa-qrcode"></i></button></div></div><div class="config-link">${escapeHtml(cfg.length > 80 ? cfg.substring(0, 80)+"..." : cfg)}</div>`;
       let copyBtn = div.querySelector(".copyConfigBtn");
       let qrBtn = div.querySelector(".qrConfigBtn");
       copyBtn.dataset.raw = cfg;
