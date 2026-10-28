@@ -35,3 +35,5 @@ yarn-error.log*
 
 # Node modules if added later
 node_modules/
+
+preview.html
