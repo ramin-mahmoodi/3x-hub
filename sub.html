@@ -738,7 +738,7 @@
     .modal {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 10000;
       display: none;
       align-items: center;
       justify-content: center;
@@ -1520,6 +1520,14 @@
       }
     }
 
+  
+    #qrModalContainer canvas,
+    #qrModalContainer img {
+      display: block;
+      width: 220px;
+      height: 220px;
+    }
+
   </style>
 </head>
 <body data-fixed-version="config-scroll-v8">
@@ -1789,14 +1797,23 @@
 </div>
 
 <!-- MODAL -->
-<div id="qrModal" class="modal">
-  <div class="modal-content">
-    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;"><strong id="modalQrTitle">QR کد اشتراک</strong><button id="closeModalBtn" type="button" aria-label="بستن" style="background:none; border:none; color:var(--text-primary); font-size:1.2rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button></div>
-    <img id="qrModalImg" class="qr-img" alt="QR Code">
-    <p id="qrModalText" style="font-size:0.75rem; word-break: break-all; margin-top: 0.6rem; direction: ltr;"></p>
+  <div id="qrModal" class="modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <strong id="modalQrTitle">QR کد اشتراک</strong>
+        <button id="closeModalBtn" type="button" aria-label="بستن" style="background:none; border:none; color:var(--text-primary); font-size:1.2rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center; background: #fff; padding: 12px; border: 2.5px solid var(--border); border-radius: var(--radius-md); box-shadow: 3px 3px 0 var(--border); width: fit-content; margin: 0 auto;">
+        <div id="qrModalContainer"></div>
+      </div>
+      <p id="qrModalText" style="font-size:0.75rem; word-break: break-all; margin-top: 0.8rem; direction: ltr; text-align: center; color: var(--text-secondary);"></p>
+      <div style="display: flex; gap: var(--space-2); margin-top: 1rem;">
+        <button id="modalCopyBtn" class="btn-icon btn-primary" type="button" style="flex: 1;"><i class="fa-regular fa-copy"></i> <span id="modalCopyLabel">کپی لینک</span></button>
+        <button id="modalSaveQrBtn" class="btn-icon" type="button" style="flex: 1;"><i class="fa-solid fa-download"></i> <span id="modalSaveQrLabel">ذخیره QR</span></button>
+      </div>
+    </div>
   </div>
-</div>
-<div id="toastMessage" class="toast">Copied!</div>
+  <div id="toastMessage" class="toast">Copied!</div>
 
 <script>
   // ======================== LOCAL OFFLINE QR GENERATOR (ZERO EXTERNAL REQUESTS) ========================
@@ -2060,21 +2077,30 @@
   function showQR(data, title, label) { 
     if (!data) { showToast(t("copyFail")); return; }
     currentQrData = data;
-    document.getElementById("modalQrTitle").innerText = title || t("qrTitle"); 
-    document.getElementById("qrModalText").innerText = label || data; 
+    const titleEl = document.getElementById("modalQrTitle");
+    if (titleEl) titleEl.innerText = title || t("qrTitle"); 
+    const textEl = document.getElementById("qrModalText");
+    if (textEl) textEl.innerText = label || data; 
     
     const container = document.getElementById("qrModalContainer");
-    container.innerHTML = "";
-    modalQrInstance = new QRCode(container, {
-      text: data,
-      width: 230,
-      height: 230,
-      colorDark: "#000000",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M
-    });
+    if (container) {
+      container.innerHTML = "";
+      try {
+        modalQrInstance = new QRCode(container, {
+          text: data,
+          width: 220,
+          height: 220,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } catch(err) {
+        console.error("QR Generation error:", err);
+      }
+    }
 
-    document.getElementById("qrModal").classList.add("show"); 
+    const modal = document.getElementById("qrModal");
+    if (modal) modal.classList.add("show"); 
   }
 
   function closeModal() { document.getElementById("qrModal").classList.remove("show"); }
@@ -2221,70 +2247,6 @@
     });
   }
 
-  function renderApps() {
-    const encSub = encodeURIComponent(subLink);
-    const profileName = encodeURIComponent(templateVars.subTitle || "3x-Hub");
-    const rocketSource = `${subLink}${subLink.includes('?') ? '&' : '?'}flag=shadowrocket`;
-
-    let apps = [
-      {
-        name: "Android", icon: "fa-brands fa-android",
-        list: [
-          { n: "v2rayNG", url: "https://github.com/2dust/v2rayNG/releases", direct: `v2rayng://install-config?url=${encSub}` },
-          { n: "V2Box", url: "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box", direct: `v2box://install-sub?url=${encSub}&name=${profileName}` },
-          { n: "Happ", url: "https://happ.app/", direct: `happ://add/${subLink}` },
-          { n: "Hiddify", url: "https://github.com/hiddify/hiddify-next/releases", direct: `hiddify://install-config?url=${encSub}#${profileName}` },
-          { n: "Sing-box", url: "https://github.com/SagerNet/sing-box/releases", direct: `sing-box://import-remote-profile?url=${encSub}#${profileName}` },
-          { n: "Incy", url: "https://github.com/mhsanaei/3x-ui", direct: `incy://add/${subLink}` }
-        ]
-      },
-      {
-        name: "iOS", icon: "fa-brands fa-apple",
-        list: [
-          { n: "V2Box", url: "https://apps.apple.com/us/app/v2box-v2ray-client/id6446814042", direct: `v2box://install-sub?url=${encSub}&name=${profileName}` },
-          { n: "Shadowrocket", url: "https://apps.apple.com/us/app/shadowrocket/id932747118", direct: `shadowrocket://add/sub://${btoa(rocketSource)}?remark=${profileName}` },
-          { n: "Streisand", url: "https://apps.apple.com/us/app/streisand/id6450534064", direct: `streisand://import/${encSub}` },
-          { n: "Happ", url: "https://apps.apple.com/app/happ-proxy-utility/id6504287215", direct: `happ://add/${subLink}` },
-          { n: "Incy", url: "https://apps.apple.com", direct: `incy://add/${subLink}` }
-        ]
-      },
-      {
-        name: "Windows", icon: "fa-brands fa-windows",
-        list: [
-          { n: "v2rayN", url: "https://github.com/2dust/v2rayN/releases" },
-          { n: "Clash Verge", url: "https://github.com/clash-verge-rev/clash-verge-rev/releases" },
-          { n: "Hiddify Next", url: "https://github.com/hiddify/hiddify-next/releases" }
-        ]
-      },
-      {
-        name: "macOS", icon: "fa-brands fa-apple",
-        list: [
-          { n: "V2rayU", url: "https://github.com/yanue/V2rayU/releases" },
-          { n: "Clash Verge", url: "https://github.com/clash-verge-rev/clash-verge-rev/releases" },
-          { n: "Hiddify Next", url: "https://github.com/hiddify/hiddify-next/releases" }
-        ]
-      }
-    ];
-    let grid = document.getElementById("appsGridContainer");
-    grid.innerHTML = "";
-    apps.forEach(os => {
-      let card = document.createElement("div"); card.className = "app-card";
-      card.innerHTML = `<div class="app-header"><span class="app-title"><i class="${os.icon}"></i><span>${os.name}</span></span><i class="fa-solid fa-chevron-down chev"></i></div><div class="app-links"></div>`;
-      let linksDiv = card.querySelector(".app-links");
-      os.list.forEach(app => {
-        let div = document.createElement("div");
-        div.style.cssText = "display: flex; gap: 0.4rem; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;";
-        div.innerHTML = `
-          <a href="${app.url}" target="_blank" class="app-link" style="flex:1;"><span>${app.n}</span> <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          ${app.direct ? `<a href="${app.direct}" class="btn-icon" title="${t("quickConnect") || 'اتصال سریع'}" style="padding: 0.35rem 0.65rem; font-size: 0.75rem; border-radius: var(--radius-sm);"><i class="fa-solid fa-bolt"></i></a>` : ''}
-        `;
-        linksDiv.appendChild(div);
-      });
-      card.querySelector(".app-header").addEventListener("click", () => { card.classList.toggle("open"); });
-      grid.appendChild(card);
-    });
-  }
-
   function escapeHtml(str) { return String(str).replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
   function forcePersianDigitsInTextNodes(root = document.body) {
@@ -2315,32 +2277,57 @@
   }
 
   function updateUI() {
-    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-    document.documentElement.lang = currentLang === "fa" ? "fa" : "en";
+    document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === "fa" ? "rtl" : "ltr";
     localStorage.setItem("nexus_theme", isDark ? "dark" : "light");
     localStorage.setItem("nexus_lang", currentLang);
+
     const ts = document.getElementById("themeSwitch");
     if (ts) ts.checked = isDark;
     const badgeEl = document.getElementById("tabConfigsBadge");
     if (badgeEl) badgeEl.innerText = formatDisplay(configsList.length);
-    updateDocumentTitle();
-    document.getElementById("panelTitle").innerText = getPanelTitle();
-    document.getElementById("usedStatLabel").innerText = t("used");
-    document.querySelectorAll(".stat-unit").forEach(el => { el.innerText = volumeUnit(); });
-    document.getElementById("totalStatLabel").innerText = t("total");
-    document.getElementById("remainStatLabel").innerText = t("remain");
-    document.getElementById("expiryStatLabel").innerText = t("expiry");
-    document.getElementById("daysLabel").innerText = t("days");
-    document.getElementById("hoursLabel").innerText = t("hours");
-    document.getElementById("minutesLabel").innerText = t("minutes");
-    document.getElementById("ringUsageLabel").innerText = t("usage");
-    document.getElementById("configsTitle").innerText = t("configTitle");
-    document.getElementById("appsTitleApp").innerText = t("appsTitle");
-    document.getElementById("tabNavDashboard").innerText = t("tabDashboard");
-    document.getElementById("tabNavConfigs").innerText = t("tabConfigs");
-    document.getElementById("tabNavImport").innerText = t("tabImport");
-    document.getElementById("tabNavApps").innerText = t("tabApps");
+
+    // Header & Stats translations
+    const elSubHub = document.getElementById("subscriptionHubTitle");
+    if (elSubHub) elSubHub.innerText = t("subscriptionHub");
+    const elUsedStat = document.getElementById("usedStatLabel");
+    if (elUsedStat) elUsedStat.innerText = t("used");
+    const elTotalStat = document.getElementById("totalStatLabel");
+    if (elTotalStat) elTotalStat.innerText = t("total");
+    const elRemainStat = document.getElementById("remainStatLabel");
+    if (elRemainStat) elRemainStat.innerText = t("remain");
+    const elExpiryStat = document.getElementById("expiryStatLabel");
+    if (elExpiryStat) elExpiryStat.innerText = t("expiry");
+    const elRingUsage = document.getElementById("ringUsageLabel");
+    if (elRingUsage) elRingUsage.innerText = t("usage");
+    const elUsedUnit = document.getElementById("usedUnit");
+    if (elUsedUnit) elUsedUnit.innerText = t("volumeUnit");
+    const elDownLabel = document.getElementById("downloadLabel");
+    if (elDownLabel) elDownLabel.innerText = t("download");
+    const elUpLabel = document.getElementById("uploadLabel");
+    if (elUpLabel) elUpLabel.innerText = t("upload");
+    const elExpiryText = document.getElementById("expiryTextLabel");
+    if (elExpiryText) elExpiryText.innerText = t("remainTime");
+    const elDays = document.getElementById("daysLabel");
+    if (elDays) elDays.innerText = t("days");
+    const elHours = document.getElementById("hoursLabel");
+    if (elHours) elHours.innerText = t("hours");
+    const elMins = document.getElementById("minutesLabel");
+    if (elMins) elMins.innerText = t("minutes");
+    const elConfigsTitle = document.getElementById("configsTitle");
+    if (elConfigsTitle) elConfigsTitle.innerText = t("configTitle");
+
+    // Tab buttons translations
+    const elTabDash = document.getElementById("tabNavDashboard");
+    if (elTabDash) elTabDash.innerText = t("tabDashboard");
+    const elTabImp = document.getElementById("tabNavImport");
+    if (elTabImp) elTabImp.innerText = t("tabImport");
+    const elTabApps = document.getElementById("tabNavApps");
+    if (elTabApps) elTabApps.innerText = t("tabApps");
+    const elTabConfigs = document.getElementById("tabNavConfigs");
+    if (elTabConfigs) elTabConfigs.innerText = t("tabConfigs");
+
+    // Other section labels
     if (document.getElementById("lblCopyAll")) document.getElementById("lblCopyAll").innerText = t("copyAll");
     if (document.getElementById("quickLinksTitle")) document.getElementById("quickLinksTitle").innerText = t("quickImport");
     if (document.getElementById("appsHeaderTitle")) document.getElementById("appsHeaderTitle").innerText = t("appsTitle");
@@ -2354,31 +2341,50 @@
     if (document.getElementById("lblSubJson")) document.getElementById("lblSubJson").innerText = t("subJson");
     if (document.getElementById("lblSubClash")) document.getElementById("lblSubClash").innerText = t("subClash");
     if (document.getElementById("configSearchInput")) document.getElementById("configSearchInput").placeholder = t("searchConfigs");
-    document.getElementById("copyMainBtn").setAttribute("aria-label", t("copy"));
-    document.getElementById("copyMainBtn").setAttribute("title", t("copy"));
-    document.getElementById("qrMainBtn").setAttribute("aria-label", t("qr"));
-    document.getElementById("qrMainBtn").setAttribute("title", t("qr"));
-    document.getElementById("themeToggleBtn").setAttribute("aria-label", currentLang === "fa" ? "تغییر حالت روشن و تاریک" : "Toggle light/dark mode");
-    document.getElementById("langToggleBtn").setAttribute("aria-label", currentLang === "fa" ? "تغییر زبان" : "Change language");
-    document.getElementById("closeModalBtn").setAttribute("aria-label", currentLang === "fa" ? "بستن" : "Close");
-    if (emailsList.length) 
-      document.getElementById("userEmailBadge").innerHTML = `<i class="fa-regular fa-user"></i> ${emailsList.join(currentLang === "fa" ? " ، " : ", ")}`;
-    else 
-      document.getElementById("userEmailBadge").innerHTML = "";
+
+    const copyMainBtn = document.getElementById("copyMainBtn");
+    if (copyMainBtn) {
+      copyMainBtn.setAttribute("aria-label", t("copy"));
+      copyMainBtn.setAttribute("title", t("copy"));
+    }
+    const qrMainBtn = document.getElementById("qrMainBtn");
+    if (qrMainBtn) {
+      qrMainBtn.setAttribute("aria-label", t("qr"));
+      qrMainBtn.setAttribute("title", t("qr"));
+    }
+    const langToggleBtn = document.getElementById("langToggleBtn");
+    if (langToggleBtn) {
+      langToggleBtn.setAttribute("aria-label", currentLang === "fa" ? "تغییر زبان" : "Change language");
+      langToggleBtn.setAttribute("title", currentLang === "fa" ? "English" : "فارسی");
+    }
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    if (closeModalBtn) {
+      closeModalBtn.setAttribute("aria-label", currentLang === "fa" ? "بستن" : "Close");
+    }
+
+    if (emailsList.length) {
+      const emailBadge = document.getElementById("userEmailBadge");
+      if (emailBadge) emailBadge.innerHTML = `<i class="fa-regular fa-user"></i> ${emailsList.join(currentLang === "fa" ? " ، " : ", ")}`;
+    } else {
+      const emailBadge = document.getElementById("userEmailBadge");
+      if (emailBadge) emailBadge.innerHTML = "";
+    }
+
     let isOnline = String(templateVars.isOnline).toLowerCase() === "true";
     let dot = document.getElementById("liveOnlineDot");
     if (dot) {
       dot.className = `live-dot ${isOnline ? '' : 'is-offline'}`;
       dot.title = isOnline ? (currentLang === "fa" ? "آنلاین" : "Online") : (currentLang === "fa" ? "آفلاین" : "Offline");
     }
+
     renderStatsAndRing();
     renderExpiryCountdown();
     renderConfigs();
-    renderApps();
+    renderSubLinks();
+    renderPlatformApps(activePlatform);
     forcePersianDigitsInTextNodes();
   }
 
-  // ---------- Live Polling Feature (?format=info) ----------
   async function pollLiveInfo() {
     try {
       const res = await fetch(window.location.pathname + "?format=info", { cache: "no-store" });
